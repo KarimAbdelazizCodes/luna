@@ -32,4 +32,3 @@ class Restaurant(models.Model):
     def __str__(self):
         return f'restaurant {self.name}, owner {self.owner}'
 
-
