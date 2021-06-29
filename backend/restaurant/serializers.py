@@ -30,8 +30,3 @@ class CategoriesSerializer(serializers.ModelSerializer):
 
 
 # TODO: list of 4 best rated restaurants /api/home/
-
-
-
-
-

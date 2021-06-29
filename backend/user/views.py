@@ -19,11 +19,11 @@ class ListUserView(ListAPIView):
 
         - Search: Searches for instance of user by username, first and last name, job or email
             - Add search parameter for appropriate response
-            - ex: https://krab-motion.propulsion-learn.ch/backend/api/users/?search=waltersobchak@aol.com
+            - ex: https://luna-scorpio.propulsion-learn.ch/backend/api/users/?search=waltersobchak@aol.com
 
         - Combination: Searches for instance of user by search params, with pagination included
             - Add search , offset and limit parameters to enable pagination with search
-            - ex: https://krab-motion.propulsion-learn.ch/backend/api/users/?search=waltersobchak@aol.com&offset=0&limit=25
+            - ex: https://luna-scorpio.propulsion-learn.ch/backend/api/users/?search=waltersobchak@aol.com&offset=0&limit=25
      """
     queryset = User.objects.all()
     pagination_class = LimitOffsetPagination
