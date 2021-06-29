@@ -20,6 +20,7 @@ class Review(models.Model):
     author = models.OneToOneField(to=User, on_delete=models.CASCADE, blank=False)
     restaurant = models.OneToOneField(to=Restaurant, on_delete=models.CASCADE, blank=False,
                                       related_name='review')
+    liked_by = models.ManyToManyField(to=User, related_name='liked_reviews')
 
     def __str__(self):
         return f'Review #{self.id} from {self.author}'
