@@ -12,7 +12,7 @@ services:
     image: registry.gitlab.propulsion-home.ch/full-stack/batch-16-may-2021/luna-group-project/scorpio/luna:latest
     env_file:
       - ./envs/prod.env
-    command: "sh /scripts/run.sh"
+    command: "sh /script/run.sh"
     depends_on:
       - postgres
     volumes:
