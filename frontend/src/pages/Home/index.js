@@ -1,15 +1,31 @@
 import React from 'react';
-import Rating from '../../components/Rating'
+import Rating from '../../components/Rating';
+import Input from '../../components/Input';
+import { PageWrapper } from '../Login/styled';
 
-const Home = () => {
+
+const HomePage = () => {
     return (
     <>
         <Rating />
+        <Input 
+            placeholder='Search...'
+            name='search'
+            formId='search_form'/>
+        <Input 
+            placeholder='Find...'
+            name='find'
+            formId='search_form'/>
+        <Input 
+            placeholder='Random...'
+            name='random'
+            formId='random_form'/>
         <h1>Title 1</h1>
         <h2>Title 2</h2>
         <h3>Title 3</h3>
         <h4>Title 4</h4>
-        <button>button</button>
+        <button>HALLO</button>
+        <button>ZWEI</button>
         <article>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nibh risus, 
@@ -59,4 +75,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default HomePage;
