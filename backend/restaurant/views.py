@@ -1,6 +1,10 @@
+from django.db.models import Q
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
 from restaurant.models import Restaurant, Category
 from restaurant.serializers import RestaurantsSerializer, CategoriesSerializer
+from review.models import Review, User
+from review.serializers.mainserializer import MainReviewSerializer
+from user.serializers.mainserializer import MainUserSerializer
 
 
 class ListRestaurantsView(ListAPIView):
@@ -75,3 +79,36 @@ class ListCategoriesView(ListAPIView):
     """
     queryset = Category.objects.all()
     serializer_class = CategoriesSerializer
+
+
+class Search(ListAPIView):
+    """
+    get:
+    Search users, reviews or restaurants
+
+    Default search param is set to Restaurant, the frontend developer is responsible
+    for changing the param to either 'users' or 'restaurants' based on the user's preference
+    """
+    def get_serializer_class(self):
+        search_type = self.request.query_params.get('type')
+        if search_type == 'restaurants':
+            return RestaurantsSerializer
+        elif search_type == 'users':
+            return MainUserSerializer
+        else:
+            return MainReviewSerializer
+
+    def get_queryset(self):
+        search = self.request.query_params.get('search')
+        search_type = self.request.query_params.get('type')
+        if search_type == 'restaurants':
+            return Restaurant.objects.filter(Q(name__icontains=search) |
+                                             Q(category__category__icontains=search))
+        elif search_type == 'users':
+            return User.objects.filter(Q(first_name__icontains=search) |
+                                       Q(last_name__icontains=search) |
+                                       Q(username__icontains=search))
+        else:
+            return Review.objects.filter(Q(content__icontains=search) |
+                                         Q(author__username__icontains=search))
+
