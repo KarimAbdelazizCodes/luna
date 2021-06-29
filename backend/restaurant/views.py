@@ -1,7 +1,5 @@
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from restaurant.models import Restaurant, Category
-from restaurant.permissions import IsOwnerOrSuperuserOrReadOnly
 from restaurant.serializers import RestaurantsSerializer, CategoriesSerializer
 
 
@@ -76,9 +74,3 @@ class ListCategoriesView(ListAPIView):
     """
     queryset = Category.objects.all()
     serializer_class = CategoriesSerializer
-
-
-
-
-
-

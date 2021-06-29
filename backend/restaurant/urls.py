@@ -10,6 +10,3 @@ urlpatterns = [
     path('restaurants/<int:id>/', RetrieveUpdateDestroyRestaurantView.as_view()),
     path('category/list/', ListCategoriesView.as_view()),
 ]
-
-
-
