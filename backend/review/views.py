@@ -1,6 +1,5 @@
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, CreateAPIView, ListAPIView, RetrieveAPIView, \
-    RetrieveUpdateDestroyAPIView, UpdateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 from restaurant.models import Restaurant
@@ -92,4 +91,3 @@ class ListCommentedReviews(ListAPIView):
     def get_queryset(self):
         author = self.request.user
         return Review.objects.filter(comments__author=author)
-
