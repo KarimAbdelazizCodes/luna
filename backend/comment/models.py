@@ -11,8 +11,8 @@ class Comment(models.Model):
     text = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     edited = models.DateTimeField(auto_now=True)
-    review = models.ForeignKey(to=Review, on_delete=models.CASCADE, blank=False)
-    liked_by = models.ManyToManyField(to=User, related_name='likes')
+    review = models.ForeignKey(to=Review, on_delete=models.CASCADE, blank=False, related_name='comments')
+    liked_by = models.ManyToManyField(to=User, related_name='likes', blank=True)
 
     def __str__(self):
         return f'Comment #{self.id}, authored by {self.author} on {self.review}'
