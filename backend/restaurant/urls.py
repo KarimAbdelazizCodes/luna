@@ -1,6 +1,6 @@
 from django.urls import path
 from restaurant.views import ListRestaurantsView, CreateRestaurantView, ListRestaurantsByCategoryView, \
-    ListRestaurantsByOwnerView, RetrieveUpdateDestroyRestaurantView, ListCategoriesView
+    ListRestaurantsByOwnerView, RetrieveUpdateDestroyRestaurantView, ListCategoriesView, Search
 
 urlpatterns = [
     path('restaurants/', ListRestaurantsView.as_view()),
@@ -9,4 +9,5 @@ urlpatterns = [
     path('restaurants/user/<int:owner_id>/', ListRestaurantsByOwnerView.as_view()),
     path('restaurants/<int:id>/', RetrieveUpdateDestroyRestaurantView.as_view()),
     path('category/list/', ListCategoriesView.as_view()),
+    path('search/', Search.as_view()),
 ]
