@@ -16,4 +16,5 @@ class MainUserSerializer(serializers.ModelSerializer):
         'about',
         'email',
         'phone_number',
-        ]
+        'hobbies',
+    ]
