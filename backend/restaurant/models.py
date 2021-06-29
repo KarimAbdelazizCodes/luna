@@ -9,9 +9,17 @@ def user_directory_path(instance, filename):
     return f'{instance.name}/{filename}'
 
 
+class Category(models.Model):
+    category = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.category}'
+
+
 class Restaurant(models.Model):
     name = models.CharField(max_length=100, blank=False)
-    category = models.JSONField(max_length=100, default=list)
+    category = models.ForeignKey(to=Category, on_delete=models.CASCADE,
+                                 related_name='restaurants', blank=True, null=True)
     country = models.CharField(max_length=100)
     street = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
@@ -28,7 +36,8 @@ class Restaurant(models.Model):
     avatar = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
     owner = models.ForeignKey(to=User, blank=False, null=False, on_delete=models.CASCADE,
                               related_name='owner')
+    created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     def __str__(self):
-        return f'restaurant {self.name}, owner {self.owner}'
-
+        return f'{self.name} by {self.owner}'
