@@ -1,7 +1,5 @@
-// React
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 // Redux state-control
 import { Provider } from 'react-redux';
 import store from './store';

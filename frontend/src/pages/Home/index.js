@@ -2,21 +2,23 @@ import React from 'react';
 import Rating from '../../components/Rating';
 import Input from '../../components/Input';
 import { PageWrapper } from '../Login/styled';
-
+import RestaurantCard from '../../components/RestaurantCard/RestaurantCard';
 
 const HomePage = () => {
     return (
     <>
+        <Header></Header>
+
         <Rating />
-        <Input 
+        <Input
             placeholder='Search...'
             name='search'
             formId='search_form'/>
-        <Input 
+        <Input
             placeholder='Find...'
             name='find'
             formId='search_form'/>
-        <Input 
+        <Input
             placeholder='Random...'
             name='random'
             formId='random_form'/>
@@ -69,7 +71,9 @@ const HomePage = () => {
         </ul>
         </nav>
 
+    <RestaurantCard></RestaurantCard>
 
+    <Footer></Footer>
 
     </>
     )
