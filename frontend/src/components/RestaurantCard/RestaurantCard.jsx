@@ -1,68 +1,72 @@
 import React from "react";
-import Rating from '../../components/Rating';
 import styled from 'styled-components';
-import buffet from "../../assets/buffet.png"
+import {Card} from "../../templates/Card";
+import StaticRating from "../Rating/static";
 
 
-
-
-const CardContainer = styled.div`
-    border: 2px solid red;
-    border-top-style: solid;
-    border-top-color: #E47D31;
-    border-top-width: 8px;
-    display: flex;
-    width: 271px;
-    height: 410px;
-    background-color: white;
-`
-
-const CardTop = styled.div`
-    border: 1px solid blue;
-    height: 115px;
-    width: 271px;
-`
-
-const CardBottom = styled.div`
-    border: 1px solid green;
-    display: flex;
-    align-self: flex-end;
-    /* justify-content: space-between; */
-    /* flex-direction: column; */
-    height: 275px;
-    width: 271px;
-
-    .resize {
-        width: 260px;
-        height: 260px;
+const Wrapper = styled(Card)`
+    .name{
+      font-weight: 600;    
+    }
+  
+    .smaller-font{
+      font-size: 13px;
+    }
+  
+    .address {
+      display: flex;
+      flex-direction: column;
+      margin: 5px;
+    }
+    
+    .ratings, .restaurant-info, .avatar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 5px;
+    }
+  
+    img {
+      width: 100%;
     }
 `
 
 
+const RestaurantCard = props => {
+    //destructuring props
+    const { name, street, city, zip, number_of_reviews, avatar, average_rating, price_level } = props.restaurant
 
-
-const RestaurantCard = () => {
+    const convertPriceLevel = price => {
+        switch(price){
+            case '1':
+                return '$'
+            case '2':
+                return '$$'
+            case '3':
+                return '$$$'
+        }
+    }
 
     return(
-
-        <div>
-            <CardContainer>
-
-                <CardTop>
-                    <h2>Restaurant Name</h2>
-                    <h2>Address</h2>
-                    <Rating></Rating>
-                </CardTop>
-
-
-                <CardBottom>
-                    <img  class="resize" src={buffet} id="BuffetImg" alt="buffet"></img>
-                </CardBottom>
-
-            </CardContainer>
-        </div>
-
-        );
+        <Wrapper>
+            <div className="restaurant-info">
+                <span className="name">{name}</span>
+                <span className="smaller-font">Price level: {convertPriceLevel(price_level)}</span>
+            </div>
+            <div className="address smaller-font">
+                <span>{street}</span>
+                <span>{city}</span>
+                <span>{zip}</span>
+            </div>
+            <div className="ratings">
+                <StaticRating average={average_rating}/>
+                <span className="smaller-font">{number_of_reviews} {number_of_reviews === 1 ? 'review' : 'reviews'}</span>
+            </div>
+            <div className="avatar">
+                <img src={avatar} alt="avatar" />
+            </div>
+        </Wrapper>
+    );
 }
 
 export default RestaurantCard;

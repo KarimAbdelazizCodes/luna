@@ -47,13 +47,13 @@ function Footer() {
                     </div>
 
                     <div id="socialmedia">
-                        <img  src={facebook} id="fbImg" alt="facebook"></img>
+                        <img  src={facebook} id="fbImg" alt="facebook"/>
 
-                        <img  src={twitter} id="twitterImg" alt="twitter"></img>
+                        <img  src={twitter} id="twitterImg" alt="twitter"/>
 
-                        <img  src={googleplus} id="googleImg" alt="googleplus"></img>
+                        <img  src={googleplus} id="googleImg" alt="googleplus"/>
 
-                        <img  src={instagram} id="instaImg" alt="instagram"></img>
+                        <img  src={instagram} id="instaImg" alt="instagram"/>
                     </div>
                 </div>
                 <div className="footer-bottom">

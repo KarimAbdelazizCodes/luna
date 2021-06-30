@@ -1,6 +1,8 @@
 from django.db.models import Q
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.permissions import AllowAny
+
 from restaurant.models import Restaurant, Category
 from restaurant.serializers import RestaurantsSerializer, CategoriesSerializer
 from review.models import Review, User
@@ -119,6 +121,7 @@ class Search(ListAPIView):
 
 
 class ListBestRestaurantsView(ListAPIView):
+    permission_classes = [AllowAny]
     """
        get:
        Get list of all categories

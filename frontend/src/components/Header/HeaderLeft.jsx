@@ -16,7 +16,7 @@ const HeaderLeftContainer = styled.div`
     }
 `
 
-const HeaderLeft = ()=> {
+const HeaderLeft = () => {
 
     return(
         <HeaderLeftContainer>

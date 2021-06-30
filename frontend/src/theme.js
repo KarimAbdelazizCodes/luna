@@ -125,7 +125,6 @@ export const GlobalStyle = createGlobalStyle`
                 }
             }
         }
-
-
+      
     }
 `;
