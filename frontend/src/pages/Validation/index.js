@@ -6,6 +6,8 @@ import convertSnakeCase from '../../helpers/converSnakeCase';
 
 import styled from 'styled-components';
 import { PageWrapper } from '../Login/styled';
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 const ValidationPageWrapper = styled(PageWrapper)`
     main {
@@ -61,9 +63,7 @@ const ValidationPage = (props) => {
 
     return (
         <ValidationPageWrapper>
-            <header>
-
-            </header>
+            <Header />
 
             <main>
             <div className='title_decorator'>
@@ -87,9 +87,7 @@ const ValidationPage = (props) => {
             </form>
             </main>
 
-            <footer>
-
-            </footer>
+            <Footer />
         </ValidationPageWrapper>
     )
 }

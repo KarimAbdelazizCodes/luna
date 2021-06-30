@@ -2,9 +2,17 @@ import styled from "styled-components";
 
 export const PageWrapper = styled.div`
     width: 100%;
+    height: 100vh;
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
     align-items: center;
+    padding: 0px;
+    margin: 0px;
+
+    footer, header {
+        width: 100%;
+    }
 
 
     main {
@@ -33,6 +41,7 @@ export const PageWrapper = styled.div`
         h1 { 
             padding: 15px;
             text-align: center;
+            white-space: nowrap;
         }
         p {
             text-align: center;

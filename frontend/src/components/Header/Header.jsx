@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import HeaderRight from "./HeaderRight";
 
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.header`
     display: flex;
     width: 100%;
     height: 80px;
@@ -15,17 +15,10 @@ const HeaderContainer = styled.div`
 const Header = () => {
 
     return(
-
-        <div>
             <HeaderContainer>
-
-            <HeaderLeft/>
-
+                <HeaderLeft/>
                 <HeaderRight/>
-
             </HeaderContainer>
-        </div>
-
         );
 }
 
