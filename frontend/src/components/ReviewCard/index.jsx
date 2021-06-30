@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 import {Card} from "../../templates/Card";
-import {useDispatch} from "react-redux";
+import Axios from "../../api";
 
 
 const Wrapper = styled(Card)`
@@ -71,13 +71,24 @@ const Wrapper = styled(Card)`
     }
   }
   
+  .latest-comments {
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 
 const ReviewCard = props => {
     //destructuring props
-    const { author, restaurant, content, number_of_likes, number_of_comments } = props.review
-    const dispatch = useDispatch()
+    const { id, author, restaurant, content, number_of_likes, number_of_comments, latest_comments } = props.review
+
+    const toggleLikeUnlike = async (id) =>{
+        const url = `reviews/like/${id}/`
+        const config = {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        };
+        const response = await Axios.patch(url, null, config)
+    }
 
 
 
@@ -99,11 +110,21 @@ const ReviewCard = props => {
             </div>
             <div className="like-comment">
                 <div>
-                    <button>like {number_of_likes}</button>
+                    <button onClick={() => toggleLikeUnlike(id)}>
+                        {number_of_likes} { number_of_likes === 1 ? 'like' : 'likes'}</button>
                 </div>
                 <div>
                     <button>comment {number_of_comments}</button>
                 </div>
+            </div>
+            <div className="latest-comments">
+                <span>Latest comments</span>
+                {latest_comments ? latest_comments.map(comment =>
+                    <>
+                        <span>{comment.author_id}</span>
+                        <span>{comment.text}</span>
+                    </>
+                ) : null}
             </div>
         </Wrapper>
     );

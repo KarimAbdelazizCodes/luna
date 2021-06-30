@@ -2,16 +2,16 @@ import styled from "styled-components";
 import {PageWrapper} from "../Login/styled";
 
 export const Wrapper = styled(PageWrapper)`
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
+  //display: flex;
+  //justify-content: flex-start;
+  //width: 100%;
   
-  main {
+  .container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
-    
+
     .views {
       display: flex;
       justify-content: center;
@@ -24,12 +24,12 @@ export const Wrapper = styled(PageWrapper)`
         }
       }
     }
-    
+
     // this is for the views (restaurant, user, review)
     .border-bottom {
       border-bottom: 3px solid darkorange;
     }
-    
+
     .search-bar{
       display: flex;
       justify-content: space-between;
@@ -38,14 +38,14 @@ export const Wrapper = styled(PageWrapper)`
       height: 50px;
       border: 1px solid gray;
       padding: 0 10px;
-      
+
       .categories {
         height: 100%;
         background: none;
         border: none;
         outline: none;
       }
-      
+
       form {
         display: flex;
         justify-content: flex-start;

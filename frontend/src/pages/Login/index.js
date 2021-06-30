@@ -3,7 +3,6 @@ import Input from '../../components/Input';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import Axios from '../../api';
-
 import { PageWrapper } from './styled';
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -33,25 +32,25 @@ function LoginPage(props) {
     return (
         <PageWrapper>
             <Header />
-                <main>
-                    <div className='registration'>                
-                        <div className='title_decorator'>
+            <main>
+                <div className='registration'>
+                    <div className='title_decorator'>
                         <h1>Login</h1>
-                        </div>
-                        <form> 
-                            <Input 
-                                placeholder='Email'
-                                name='email'
-                                formId='loginForm'/>
-                            <Input 
-                                placeholder='Password'
-                                name='password'
-                                formId='loginForm'/>
-                            <button onClick={onHandleSubmit}>login</button>
-                        </form>
-                        <p className='message'>{message}</p>
                     </div>
-                </main>
+                    <form>
+                        <Input
+                            placeholder='Email'
+                            name='email'
+                            formId='loginForm'/>
+                        <Input
+                            placeholder='Password'
+                            name='password'
+                            formId='loginForm'/>
+                        <button onClick={onHandleSubmit}>login</button>
+                    </form>
+                    <p className='message'>{message}</p>
+                </div>
+            </main>
             <Footer />
         </PageWrapper>
     )

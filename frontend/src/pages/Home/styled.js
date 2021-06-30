@@ -1,10 +1,5 @@
 import styled from "styled-components";
 import buffet from '../../assets/homepage.jpg'
-import Input from '../../components/Input';
-
-export const SearchInput = styled(Input)`
-  height: 100px;
-`
 
 export const Search = styled.div`
   display: flex;
