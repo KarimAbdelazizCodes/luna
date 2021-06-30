@@ -1,9 +1,15 @@
 import React from 'react';
-import Rating from '../../components/Rating'
+import Rating from '../../components/Rating';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import RestaurantCard from '../../components/RestaurantCard/RestaurantCard';
+
 
 const Home = () => {
     return (
     <>
+        <Header></Header>
+
         <Rating />
         <h1>Title 1</h1>
         <h2>Title 2</h2>
@@ -53,7 +59,9 @@ const Home = () => {
         </ul>
         </nav>
 
+    <RestaurantCard></RestaurantCard>
 
+    <Footer></Footer>
 
     </>
     )
