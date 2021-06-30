@@ -83,6 +83,7 @@ class ListCategoriesView(ListAPIView):
        get:
        Get list of all categories
     """
+    permission_classes = [AllowAny]
     queryset = Category.objects.all()
     serializer_class = CategoriesSerializer
     pagination_class = LimitOffsetPagination
@@ -96,6 +97,8 @@ class Search(ListAPIView):
     Default search param is set to Restaurant, the frontend developer is responsible
     for changing the param to either 'users' or 'restaurants' based on the user's preference
     """
+    permission_classes = [AllowAny]
+
     def get_serializer_class(self):
         search_type = self.request.query_params.get('type')
         if search_type == 'restaurants':

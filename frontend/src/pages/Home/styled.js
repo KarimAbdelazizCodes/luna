@@ -14,6 +14,7 @@ export const Search = styled.div`
   background: url('${buffet}');
   background-size: cover;
   height: 300px;
+  margin-bottom: 50px;
   
   .search-container {
     display: flex;
@@ -23,6 +24,12 @@ export const Search = styled.div`
     input {
       width: 500px;
       font-size: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 50px;
+      background-color: ${(props) => props.theme.white};
+      border: ${(props) => props.theme.border};
     }
     
     button {
@@ -36,15 +43,15 @@ export const Search = styled.div`
   }
 `
 
-export const Featured = styled.div`
+export const Results = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   
-  .restaurants {
+  .results {
     display: flex;
     flex-wrap: wrap;
-    margin: 50px 138px 200px 138px;
+    margin: 0 138px 200px 138px;
   }
 `

@@ -7,4 +7,5 @@ export const Card = styled.div`
   width: 250px;
   height: 271px;
   margin: 20px;
+  background: white;
 `

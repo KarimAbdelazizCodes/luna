@@ -1,6 +1,8 @@
 const initialState = {
     hello: "world",
-    topRestaurants: []
+    topRestaurants: [],
+    searchResults: [],
+    categories: []
 }
 
 const defaultReducer = (state=initialState, action) => {
@@ -11,9 +13,12 @@ const defaultReducer = (state=initialState, action) => {
             //Check this out It is perfect!
             //console.log({...state, [form]:updatedForm})
             return {...state, [form]:updatedForm};
-
         case 'TOP_RESTAURANTS':
             return {...state, topRestaurants: action.payload}
+        case 'SEARCH_RESULTS':
+            return {...state, searchResults: action.payload}
+        case 'CATEGORIES':
+            return {...state, categories: action.payload}
         default:
             return state;
     }
