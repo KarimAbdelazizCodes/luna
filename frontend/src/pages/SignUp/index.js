@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import Axios from '../../api';
 
 import { PageWrapper } from '../Login/styled';
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 
 const SignUpPage = (props) => {
@@ -24,9 +26,7 @@ const SignUpPage = (props) => {
     }
     return (
         <PageWrapper>
-            <header>
-
-            </header>
+            <Header />
 
             <main>
             <div className='title_decorator'>
@@ -41,9 +41,7 @@ const SignUpPage = (props) => {
             </form>
             </main>
             
-            <footer>
-
-            </footer>
+            <Footer />
         </PageWrapper>
     )
 }

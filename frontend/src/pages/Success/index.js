@@ -1,13 +1,13 @@
 import React from 'react';
 import { PageWrapper } from '../Login/styled';
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 const SuccessPage = () => {
 
     return (
         <PageWrapper>
-            <header>
-
-            </header>
+            <Header />
 
             <main>
             <div className='title_decorator'>
@@ -23,9 +23,7 @@ const SuccessPage = () => {
             </div>
             </main>
 
-            <footer>
-
-            </footer>
+            <Footer />
         </PageWrapper>
     )
 }

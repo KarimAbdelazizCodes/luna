@@ -5,7 +5,7 @@ import instagram from "../../assets/instagram.svg";
 import twitter from "../../assets/twitter.svg";
 import styled from "styled-components";
 
-const FooterContainer = styled.div`
+const FooterContainer = styled.footer`
     display: flex;
     flex-direction: column;
     width: 100%;

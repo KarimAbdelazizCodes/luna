@@ -29,7 +29,7 @@ export const defaultTheme = {
 export const GlobalStyle = createGlobalStyle`
     * {
         margin: 0;
-        padding: 3px;
+        padding: 0px;
         box-sizing: border-box;
         font-family: Helvetica, Arial, sans-serif;
         list-style: none;
