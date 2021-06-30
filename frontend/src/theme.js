@@ -3,6 +3,7 @@ import { createGlobalStyle } from "styled-components";
 export const defaultTheme = {
   // Colors:
   orange: '#E47D31',
+  red: '#FD0000',
   white: '#FFFFFF',
   transparent: 'rgba(145, 145, 145, 0.6)',
   black: '#000000',
@@ -56,7 +57,8 @@ export const GlobalStyle = createGlobalStyle`
         }
 
         button:hover {
-            background-color: red;
+            background-color: ${(props) => props.theme.red};
+            cursor: pointer;
         }
         button:active {
             transform: translateY(2px);
@@ -74,6 +76,10 @@ export const GlobalStyle = createGlobalStyle`
         h1 {
             font-size: ${(props) => props.theme.fontExtraLarge};
             text-transform: uppercase;
+            -webkit-user-select: none;  /* Chrome all / Safari all */
+            -moz-user-select: none;     /* Firefox all */
+            -ms-user-select: none;      /* IE 10+ */
+            user-select: none;          /* Likely future */      
         }
 
         h2 {
@@ -92,9 +98,11 @@ export const GlobalStyle = createGlobalStyle`
             border: none;
             outline: rgba(0,0,0,0);
             background: none;
+            padding-left: 5px;
         }
         label {
             transition: transform 0.4s, font-size 0.4s;
+            padding-left: 10px;
         }
 
         article {

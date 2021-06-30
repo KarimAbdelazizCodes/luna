@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from '../../components/Input';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 import Axios from '../../api';
 import convertSnakeCase from '../../helpers/converSnakeCase';
 
@@ -10,8 +11,8 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 
 const ValidationPageWrapper = styled(PageWrapper)`
-    main {
-        width: 50%;
+    .registration {
+            width: 62%;
         form {
             display: flex;
             flex-direction: row;
@@ -23,6 +24,10 @@ const ValidationPageWrapper = styled(PageWrapper)`
                 min-width: 200px;
                 margin: 1% 2%;
             }
+            button {
+                margin-left: 50px;
+                margin-right: 50px;
+            }
         }
     }
 
@@ -32,21 +37,26 @@ const ValidationPage = (props) => {
 
     const registrationForm = useSelector((store) => store.defaultReducer.registrationForm);
     const inputs = ['code', 'username', 'first_name', 'last_name', 'password', 'password_repeat'];
+    const [message, setMessage] = useState('');
 
     const onHandleSubmit = async (e) => {
         e.preventDefault()
-        const url = "/auth/password-reset/validate/";
-        const body = {
-          code: registrationForm.code,
-          username: registrationForm.username,
-          email: registrationForm.email,
-          password: registrationForm.password,
-          password_repeat: registrationForm.password_repeat,
-        };
-
-        const response = await Axios.put(url, body);
-        if (response.status === 200) {
-            console.log(props.history.push('signup/success/'));
+        try {
+            const url = "/auth/password-reset/validate/";
+            const body = {
+            code: registrationForm.code,
+            username: registrationForm.username,
+            email: registrationForm.email,
+            password: registrationForm.password,
+            password_repeat: registrationForm.password_repeat,
+            };
+            
+            await Axios.put(url, body);
+            props.history.push('signup/success/');
+       
+        } catch {
+            setMessage('code not valid or password not consistent');
+            setTimeout(() => {setMessage('')}, 3000);
         }
     }
 
@@ -66,25 +76,28 @@ const ValidationPage = (props) => {
             <Header />
 
             <main>
-            <div className='title_decorator'>
-            <h1>verification</h1>
-            </div>
-            <form>
-                {
-                    inputs.map((input,index) => {
-                        return(
-                            <Input 
-                                placeholder={convertSnakeCase(input)}
-                                name={input}
-                                formId='registrationForm'
-                                type={defineInputType(input)}
-                                key={index}
-                            /> 
-                        )
-                    })
-                }
-                <button onClick={onHandleSubmit}>finish registration</button>
-            </form>
+                <div className='registration'>
+                    <div className='title_decorator'>
+                    <h1>verification</h1>
+                    </div>
+                    <form>
+                        {
+                            inputs.map((input,index) => {
+                                return(
+                                    <Input 
+                                        placeholder={convertSnakeCase(input)}
+                                        name={input}
+                                        formId='registrationForm'
+                                        type={defineInputType(input)}
+                                        key={index}
+                                    /> 
+                                )
+                            })
+                        }
+                        <button onClick={onHandleSubmit}>finish registration</button>
+                    </form>
+                    <p className='message'>{message}</p>
+                </div>
             </main>
 
             <Footer />
