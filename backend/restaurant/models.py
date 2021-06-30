@@ -39,5 +39,11 @@ class Restaurant(models.Model):
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated = models.DateTimeField(auto_now=True, blank=True, null=True)
 
+    @property
+    def average_rating(self):
+        if len(self.reviews.all()) > 0:
+            return sum([int(review.rating) for review in self.reviews.all()])/self.reviews.count()
+        return 0
+
     def __str__(self):
         return f'{self.name} by {self.owner}'

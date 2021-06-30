@@ -4,16 +4,9 @@ from restaurant.models import Restaurant, Category
 
 class RestaurantsSerializer(serializers.ModelSerializer):
     number_of_reviews = serializers.SerializerMethodField(read_only=True)
-    average_rating = serializers.SerializerMethodField(read_only=True)
 
     def get_number_of_reviews(self, obj):
         return obj.reviews.count()
-
-    def get_average_rating(self, obj):
-        try:
-            return sum([int(review.rating) for review in obj.reviews.all()])/obj.reviews.count()
-        except ZeroDivisionError:
-            return 'no ratings'
 
     class Meta:
         model = Restaurant
@@ -27,10 +20,6 @@ class CategoriesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
-
-
-# TODO: list of 4 best rated restaurants /api/home/
-
 
 
 
