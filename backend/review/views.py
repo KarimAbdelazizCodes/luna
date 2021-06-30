@@ -36,6 +36,7 @@ class CreateReview(CreateAPIView):
 
 
 class ListRestaurantReviews(ListAPIView):
+    pagination_class = LimitOffsetPagination
     serializer_class = MainReviewSerializer
 
     def get_queryset(self):
@@ -44,6 +45,7 @@ class ListRestaurantReviews(ListAPIView):
 
 
 class ListUserReviews(ListAPIView):
+    pagination_class = LimitOffsetPagination
     serializer_class = MainReviewSerializer
 
     def get_queryset(self):
@@ -78,6 +80,7 @@ class TriggerReviewLike(UpdateAPIView):
 
 
 class ListLikedReviews(ListAPIView):
+    pagination_class = LimitOffsetPagination
     serializer_class = MainReviewSerializer
 
     def get_queryset(self):
@@ -86,6 +89,7 @@ class ListLikedReviews(ListAPIView):
 
 
 class ListCommentedReviews(ListAPIView):
+    pagination_class = LimitOffsetPagination
     serializer_class = MainReviewSerializer
 
     def get_queryset(self):

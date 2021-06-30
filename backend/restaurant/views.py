@@ -1,5 +1,6 @@
 from django.db.models import Q
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.pagination import LimitOffsetPagination
 from restaurant.models import Restaurant, Category
 from restaurant.serializers import RestaurantsSerializer, CategoriesSerializer
 from review.models import Review, User
@@ -14,6 +15,7 @@ class ListRestaurantsView(ListAPIView):
     """
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantsSerializer
+    pagination_class = LimitOffsetPagination
 
 
 class CreateRestaurantView(CreateAPIView):
@@ -25,8 +27,8 @@ class CreateRestaurantView(CreateAPIView):
     serializer_class = RestaurantsSerializer
 
     def perform_create(self, serializer):
-        # make sure to handle cases where the category doesn't exist in the DB
-        serializer.save(owner=self.request.user)
+        category_id = self.request.data['category']
+        serializer.save(owner=self.request.user, category_id=category_id)
 
 
 class ListRestaurantsByCategoryView(ListAPIView):
@@ -36,10 +38,11 @@ class ListRestaurantsByCategoryView(ListAPIView):
 
        - must add category id to end of url, with slash afterwards
     """
+    serializer_class = RestaurantsSerializer
+    pagination_class = LimitOffsetPagination
+
     def get_queryset(self):
         return Restaurant.objects.filter(category=self.kwargs["category_id"])
-
-    serializer_class = RestaurantsSerializer
 
 
 class ListRestaurantsByOwnerView(ListAPIView):
@@ -49,10 +52,11 @@ class ListRestaurantsByOwnerView(ListAPIView):
 
        - must add owner id to end of url, with slash afterwards
     """
+    pagination_class = LimitOffsetPagination
+    serializer_class = RestaurantsSerializer
+
     def get_queryset(self):
         return Restaurant.objects.filter(owner=self.kwargs["owner_id"]).order_by("-created")
-
-    serializer_class = RestaurantsSerializer
 
 
 class RetrieveUpdateDestroyRestaurantView(RetrieveUpdateDestroyAPIView):
@@ -79,6 +83,7 @@ class ListCategoriesView(ListAPIView):
     """
     queryset = Category.objects.all()
     serializer_class = CategoriesSerializer
+    pagination_class = LimitOffsetPagination
 
 
 class Search(ListAPIView):
@@ -111,4 +116,3 @@ class Search(ListAPIView):
         else:
             return Review.objects.filter(Q(content__icontains=search) |
                                          Q(author__username__icontains=search))
-
