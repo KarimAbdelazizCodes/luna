@@ -27,6 +27,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
             'password',
             'first_name',
             'last_name',
+            'location',
         ]
 
 

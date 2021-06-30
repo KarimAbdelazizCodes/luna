@@ -17,9 +17,10 @@ class Review(models.Model):
     images = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    author = models.OneToOneField(to=User, on_delete=models.CASCADE, blank=False)
-    restaurant = models.OneToOneField(to=Restaurant, on_delete=models.CASCADE, blank=False,
-                                      related_name='review')
+    author = models.ForeignKey(to=User, on_delete=models.CASCADE, blank=False, related_name='reviews')
+    restaurant = models.ForeignKey(to=Restaurant, on_delete=models.CASCADE, blank=False,
+                                      related_name='reviews')
+    liked_by = models.ManyToManyField(to=User, related_name='liked_reviews', blank=True)
 
     def __str__(self):
         return f'Review #{self.id} from {self.author}'
