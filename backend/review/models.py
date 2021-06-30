@@ -19,7 +19,7 @@ class Review(models.Model):
     updated = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(to=User, on_delete=models.CASCADE, blank=False, related_name='reviews')
     restaurant = models.ForeignKey(to=Restaurant, on_delete=models.CASCADE, blank=False,
-                                      related_name='reviews')
+                                   related_name='reviews')
     liked_by = models.ManyToManyField(to=User, related_name='liked_reviews', blank=True)
 
     def __str__(self):

@@ -1,10 +1,10 @@
 import axios from "axios";
 
 //PRODUCTION
-const baseURL = "https://luna-scorpio.propulsion-learn.ch/backend/api/";
+//const baseURL = "https://luna-scorpio.propulsion-learn.ch/backend/api/";
 
 //DEVELOPPEMENT
-// const baseURL = "http://localhost:8000/backend/api/";
+const baseURL = "http://localhost:8000/backend/api/";
 
 const Axios = axios.create({
   baseURL: baseURL,
