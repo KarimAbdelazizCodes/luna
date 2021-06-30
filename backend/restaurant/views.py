@@ -27,8 +27,8 @@ class CreateRestaurantView(CreateAPIView):
     serializer_class = RestaurantsSerializer
 
     def perform_create(self, serializer):
-        # make sure to handle cases where the category doesn't exist in the DB
-        serializer.save(owner=self.request.user)
+        category_id = self.request.data['category']
+        serializer.save(owner=self.request.user, category_id=category_id)
 
 
 class ListRestaurantsByCategoryView(ListAPIView):
