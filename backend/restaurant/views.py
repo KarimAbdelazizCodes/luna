@@ -116,3 +116,13 @@ class Search(ListAPIView):
         else:
             return Review.objects.filter(Q(content__icontains=search) |
                                          Q(author__username__icontains=search))
+
+
+class ListBestRestaurantsView(ListAPIView):
+    """
+       get:
+       Get list of all categories
+    """
+    def get_queryset(self):
+        return sorted(Restaurant.objects.all(), key=lambda t: t.average_rating, reverse=True)[:4]
+    serializer_class = RestaurantsSerializer
