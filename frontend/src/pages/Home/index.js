@@ -3,6 +3,9 @@ import Rating from '../../components/Rating';
 import Input from '../../components/Input';
 import { PageWrapper } from '../Login/styled';
 import RestaurantCard from '../../components/RestaurantCard/RestaurantCard';
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+
 
 const HomePage = () => {
     return (
