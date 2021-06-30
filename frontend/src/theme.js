@@ -23,7 +23,7 @@ export const defaultTheme = {
 
   // Border
   border: '1px solid #EBEBEB',
-
+  orangeLine: '3px solid #E47D31'
 };
 
 export const GlobalStyle = createGlobalStyle`
@@ -51,6 +51,15 @@ export const GlobalStyle = createGlobalStyle`
             border-radius: calc( ${(props) => props.theme.defaultHeight} / 2 );
             padding: 0px 20px;
             max-width: 200px;
+
+            transition: background-color 0.4s;
+        }
+
+        button:hover {
+            background-color: red;
+        }
+        button:active {
+            transform: translateY(2px);
         }
  
         p {
@@ -58,7 +67,7 @@ export const GlobalStyle = createGlobalStyle`
             margin: 1.2em 0;
         }
 
-        p.template {
+        .template {
             color: ${(props) => props.theme.transparent};
         }
 
@@ -78,6 +87,14 @@ export const GlobalStyle = createGlobalStyle`
         h4 {
             font-size: ${(props) => props.theme.fontNormal}; 
             color: ${(props) => props.theme.orange};
+        }
+        input {
+            border: none;
+            outline: rgba(0,0,0,0);
+            background: none;
+        }
+        label {
+            transition: transform 0.4s, font-size 0.4s;
         }
 
         article {
