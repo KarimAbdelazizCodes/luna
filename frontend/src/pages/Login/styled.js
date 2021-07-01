@@ -10,11 +10,11 @@ export const PageWrapper = styled.div`
     padding: 0px;
     margin: 0px;
 
-    footer, header, main {
+    footer, header {
         width: 100%;
 
         div{
-            padding: 0px 20px;
+            padding: 0 20px;
         }
     }
 

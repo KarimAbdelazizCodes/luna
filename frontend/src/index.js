@@ -31,6 +31,9 @@ import RestaurantsProfil from './pages/RestaurantsProfil';
 import NewRestaurantPage from './pages/NewRestaurant';
 import CommentsProfilPage from './pages/CommentsProfil';
 
+const token = localStorage.getItem('token')
+if(token) store.dispatch({type: 'ADD_TOKEN', payload: token})
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

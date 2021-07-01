@@ -1,7 +1,10 @@
 from django.db.models import Q
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.permissions import AllowAny
+
 from restaurant.models import Restaurant, Category
+from restaurant.permissions import IsOwnerOrSuperuserOrReadOnly
 from restaurant.serializers import RestaurantsSerializer, CategoriesSerializer
 from review.models import Review, User
 from review.serializers.mainserializer import MainReviewSerializer
@@ -72,6 +75,7 @@ class RetrieveUpdateDestroyRestaurantView(RetrieveUpdateDestroyAPIView):
        - only superuser or restaurant owner is allowed to update/delete
     """
     queryset = Restaurant.objects.all()
+    permission_classes = [IsOwnerOrSuperuserOrReadOnly]
     serializer_class = RestaurantsSerializer
     lookup_field = 'id'
 
@@ -81,6 +85,7 @@ class ListCategoriesView(ListAPIView):
        get:
        Get list of all categories
     """
+    permission_classes = [AllowAny]
     queryset = Category.objects.all()
     serializer_class = CategoriesSerializer
     pagination_class = LimitOffsetPagination
@@ -94,6 +99,8 @@ class Search(ListAPIView):
     Default search param is set to Restaurant, the frontend developer is responsible
     for changing the param to either 'users' or 'restaurants' based on the user's preference
     """
+    permission_classes = [AllowAny]
+
     def get_serializer_class(self):
         search_type = self.request.query_params.get('type')
         if search_type == 'restaurants':
@@ -119,6 +126,7 @@ class Search(ListAPIView):
 
 
 class ListBestRestaurantsView(ListAPIView):
+    permission_classes = [AllowAny]
     """
        get:
        Get list of all categories

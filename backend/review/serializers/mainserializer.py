@@ -40,6 +40,10 @@ class MainReviewSerializer(serializers.ModelSerializer):
     restaurant = NestedRestaurantSerializer(read_only=True)
     number_of_likes = serializers.SerializerMethodField()
     number_of_comments = serializers.SerializerMethodField()
+    latest_comments = serializers.SerializerMethodField()
+
+    def get_latest_comments(self, obj):
+        return obj.comments.values().order_by('-created')[:2]
 
     def get_number_of_likes(self, obj):
         return obj.liked_by.count()
