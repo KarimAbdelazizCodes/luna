@@ -2,15 +2,12 @@ import styled from "styled-components";
 import {PageWrapper} from "../Login/styled";
 
 export const Wrapper = styled(PageWrapper)`
-  //display: flex;
-  //justify-content: flex-start;
-  //width: 100%;
-  
   .container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
+    height: 100vh;
 
     .views {
       display: flex;
@@ -27,7 +24,7 @@ export const Wrapper = styled(PageWrapper)`
 
     // this is for the views (restaurant, user, review)
     .border-bottom {
-      border-bottom: 3px solid darkorange;
+      border-bottom: ${(props) => props.theme.orangeLine};
     }
 
     .search-bar{
@@ -36,11 +33,10 @@ export const Wrapper = styled(PageWrapper)`
       align-items: center;
       width: 100%;
       height: 50px;
-      border: 1px solid gray;
+      border: ${(props) => props.theme.border};
       padding: 0 10px;
 
       .categories {
-        height: 100%;
         background: none;
         border: none;
         outline: none;
@@ -49,7 +45,7 @@ export const Wrapper = styled(PageWrapper)`
       form {
         display: flex;
         justify-content: flex-start;
-        width: auto
+        width: auto;
       }
     }
   }

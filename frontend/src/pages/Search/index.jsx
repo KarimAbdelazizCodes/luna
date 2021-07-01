@@ -7,6 +7,7 @@ import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
 import {Results} from "../Home/styled";
 import {search} from "../../store/actions/home_search";
 import ReviewCard from "../../components/ReviewCard";
+import CategoryDropdown from "../../components/CategoryDropdown";
 import {Wrapper} from "./styled";
 
 const SearchPage = props => {
@@ -34,10 +35,11 @@ const SearchPage = props => {
                                    value={searchParam}
                                    onChange={(e) => setSearch(e.target.value)}/>
                         </form>
-                        <select className="categories">
+                        <CategoryDropdown categories={categories} current={current}/>
+                        {/*<select className="categories">
                             <option>Select a category</option>
                             {categories.map(category => <option>{category.category}</option>)}
-                        </select>
+                        </select>*/}
                     </div>
 
                     <div className='views'>
