@@ -1,6 +1,6 @@
 import React from 'react';
 import Input from '../../components/Input';
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { useState } from 'react';
 import Axios from '../../api';
 import { PageWrapper } from './styled';
@@ -11,17 +11,24 @@ function LoginPage(props) {
 
     const loginForm = useSelector((store) => store.defaultReducer.loginForm);
     const [message, setMessage] = useState('');
+    const dispatch = useDispatch()
 
     const onHandleSubmit = async (e) => {
         e.preventDefault()
-        try {
-            const url = "auth/token/";
-            const body = {
+
+        const url = "auth/token/";
+        const body = {
             email: loginForm.email,
             password: loginForm.password,
-            };
-
-            await Axios.post(url, body);
+        };
+        try {
+            const response = await Axios.post(url, body);
+            const action = {
+                type: 'ADD_TOKEN',
+                payload: response.data.access
+            }
+            dispatch(action)
+            localStorage.setItem('token', response.data.access)
             props.history.push('/');    
         } catch {
             setMessage('no valid credentials provided');

@@ -7,7 +7,6 @@ import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
 import {Results} from "../Home/styled";
 import {search} from "../../store/actions/home_search";
 import ReviewCard from "../../components/ReviewCard";
-import {PageWrapper} from "../Login/styled";
 import {Wrapper} from "./styled";
 
 const SearchPage = props => {
@@ -22,7 +21,7 @@ const SearchPage = props => {
     useEffect(() => {
         dispatch(fetchCategories())
         dispatch(search(current, searchParams))
-    }, [current])
+    }, [dispatch, current])
 
     return (
         <Wrapper>

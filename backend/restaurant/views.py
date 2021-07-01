@@ -4,6 +4,7 @@ from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import AllowAny
 
 from restaurant.models import Restaurant, Category
+from restaurant.permissions import IsOwnerOrSuperuserOrReadOnly
 from restaurant.serializers import RestaurantsSerializer, CategoriesSerializer
 from review.models import Review, User
 from review.serializers.mainserializer import MainReviewSerializer
@@ -74,6 +75,7 @@ class RetrieveUpdateDestroyRestaurantView(RetrieveUpdateDestroyAPIView):
        - only superuser or restaurant owner is allowed to update/delete
     """
     queryset = Restaurant.objects.all()
+    permission_classes = [IsOwnerOrSuperuserOrReadOnly]
     serializer_class = RestaurantsSerializer
     lookup_field = 'id'
 

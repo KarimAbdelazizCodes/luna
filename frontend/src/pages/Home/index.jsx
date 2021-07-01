@@ -6,7 +6,7 @@ import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTopRestaurants } from "../../store/actions/top_restaurants";
 import { useState } from "react";
-import {search} from "../../store/actions/home_search";
+import {PageWrapper} from "../Login/styled";
 
 
 const HomePage = props => {
@@ -25,23 +25,26 @@ const HomePage = props => {
 
     return (
     <>
-        <Header />
-        <Search>
-            <form className="search-container" onSubmit={handleSubmit}>
-                <input type="text" placeholder="Search..."
-                       onChange={(e) => setSearchtext(e.target.value)} value={searchText}/>
-                <button type="submit">Search</button>
-            </form>
-        </Search>
-        <Results>
-            <h1>Best rated restaurants</h1>
-            <div className="results">
-                { topRestaurants.map((restaurant, index) =>
-                    <RestaurantCard key={index} restaurant={restaurant}/> )}
-            </div>
-        </Results>
-    <Footer />
-
+        <PageWrapper>
+            <Header />
+            <main>
+                <Search>
+                    <form className="search-container" onSubmit={handleSubmit}>
+                        <input type="text" placeholder="Search..."
+                               onChange={(e) => setSearchtext(e.target.value)} value={searchText}/>
+                        <button type="submit">Search</button>
+                    </form>
+                </Search>
+                <Results>
+                    <h1>Best rated restaurants</h1>
+                    <div className="results">
+                        { topRestaurants.map((restaurant, index) =>
+                            <RestaurantCard key={index} restaurant={restaurant}/> )}
+                    </div>
+                </Results>
+            </main>
+            <Footer />
+        </PageWrapper>
     </>
     )
 }

@@ -1,12 +1,16 @@
 import React from "react";
 import styled from 'styled-components';
 import {Card} from "../../templates/Card";
+import { withRouter } from "react-router";
 import StaticRating from "../Rating/static";
 
 
 const Wrapper = styled(Card)`
     .name{
-      font-weight: 600;    
+      font-weight: 600;
+      :hover {
+        cursor: pointer;
+      }
     }
   
     .smaller-font{
@@ -34,7 +38,7 @@ const Wrapper = styled(Card)`
 
 const RestaurantCard = props => {
     //destructuring props
-    const { name, street, city, zip, number_of_reviews, avatar, average_rating, price_level } = props.restaurant
+    const { id, name, street, city, zip, number_of_reviews, avatar, average_rating, price_level } = props.restaurant
 
     const convertPriceLevel = price => {
         switch(price){
@@ -47,10 +51,14 @@ const RestaurantCard = props => {
         }
     }
 
+    const restaurantPage = (id) => {
+        props.history.push(`/restaurant/?id=${id}`)
+    }
+
     return(
         <Wrapper>
             <div className="restaurant-info">
-                <span className="name">{name}</span>
+                <span className="name" onClick={() => restaurantPage(id)}>{name}</span>
                 <span className="smaller-font">Price level: {convertPriceLevel(price_level)}</span>
             </div>
             <div className="address smaller-font">
@@ -69,4 +77,4 @@ const RestaurantCard = props => {
     );
 }
 
-export default RestaurantCard;
+export default  withRouter(RestaurantCard);

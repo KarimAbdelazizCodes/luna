@@ -1,10 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { PageWrapper } from '../Login/styled';
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
+import {useDispatch} from "react-redux";
+import {fetchRestaurant} from "../../store/actions/get_restaurant";
 
-const RestaurantPage = () => {
+const RestaurantPage = props => {
+    const dispatch = useDispatch()
+    let restaurant_id = props.location.search.split('=')[1]
+
+    useEffect(() => {
+        dispatch(fetchRestaurant(restaurant_id))
+    }, [dispatch])
     return (
+
         <PageWrapper>
             <Header />
             

@@ -1,8 +1,10 @@
 const initialState = {
     hello: "world",
+    token: '',
     topRestaurants: [],
     searchResults: [],
-    categories: []
+    categories: [],
+    restaurant: []
 }
 
 const defaultReducer = (state=initialState, action) => {
@@ -13,12 +15,17 @@ const defaultReducer = (state=initialState, action) => {
             //Check this out It is perfect!
             //console.log({...state, [form]:updatedForm})
             return {...state, [form]:updatedForm};
+
+        case 'ADD_TOKEN':
+            return {...state, token: action.payload}
         case 'TOP_RESTAURANTS':
             return {...state, topRestaurants: action.payload}
         case 'SEARCH_RESULTS':
             return {...state, searchResults: action.payload}
         case 'CATEGORIES':
             return {...state, categories: action.payload}
+        case 'RESTAURANT':
+            return {...state, restaurant: action.payload}
         default:
             return state;
     }
