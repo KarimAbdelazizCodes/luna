@@ -8,6 +8,7 @@ import {Results} from "../Home/styled";
 import {search} from "../../store/actions/home_search";
 import ReviewCard from "../../components/ReviewCard";
 import {Wrapper} from "./styled";
+import UserCard from "../../components/userCard";
 
 const SearchPage = props => {
     const dispatch = useDispatch()
@@ -15,13 +16,13 @@ const SearchPage = props => {
     const categories = useSelector(state => state.defaultReducer.categories)
 
     let searchParams = props.location.search.split('=')[1]
-    const [searchParam, setSearch] = useState(searchParams)
+    const [keyword, setKeyword] = useState(searchParams)
     const [current, setCurrent] = useState('restaurants')
 
     useEffect(() => {
         dispatch(fetchCategories())
-        dispatch(search(current, searchParams))
-    }, [dispatch, current])
+        dispatch(search(current, keyword))
+    }, [dispatch, current, keyword])
 
     return (
         <Wrapper>
@@ -31,8 +32,8 @@ const SearchPage = props => {
                     <div className="search-bar">
                         <form>
                             <input type="text" placeholder="Search..."
-                                   value={searchParam}
-                                   onChange={(e) => setSearch(e.target.value)}/>
+                                   value={keyword}
+                                   onChange={(e) => setKeyword(e.target.value)}/>
                         </form>
                         <select className="categories">
                             <option>Select a category</option>
@@ -59,10 +60,10 @@ const SearchPage = props => {
                                 <RestaurantCard key={index} restaurant={result}/>) : null }
 
                             { current === 'reviews' ? searchResults.map((result, index) =>
-                                <ReviewCard key={index} review={result}/>) : null }
+                                <ReviewCard key={index} review={result} />) : null }
 
-                            {/*{ current === 'users' ? searchResults.map((result, index) =>*/}
-                            {/*    <UserCard key={index} review={result}/>) : null }*/}
+                            { current === 'users' ? searchResults.map((result, index) =>
+                                <UserCard key={index} user={result}/>) : null }
                         </div>
                     </Results>
                 </div>
