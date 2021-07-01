@@ -29,6 +29,9 @@ const defaultReducer = (state=initialState, action) => {
             return {...state, restaurant: action.payload}
         case 'RESTAURANT_REVIEWS':
             return {...state, reviews: action.payload}
+        case 'DROP_KEY':
+            //console.log(action.payload)
+            return {...state, dropKey: action.payload}
         default:
             return state;
     }
