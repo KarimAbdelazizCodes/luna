@@ -5,6 +5,14 @@ import Footer from "../../components/Footer/Footer";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchRestaurant} from "../../store/actions/get_restaurant";
 import MainRestaurantView from "../../components/Restaurant/main_view";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+`
 
 const RestaurantPage = props => {
     const dispatch = useDispatch()
@@ -20,7 +28,9 @@ const RestaurantPage = props => {
             <Header />
 
             <main>
-                <MainRestaurantView restaurant={restaurant}/>
+                <Container>
+                    {Object.keys(restaurant).length ? <MainRestaurantView restaurant={restaurant}/> : 'Loading...'}
+                </Container>
             </main>
 
             <Footer />

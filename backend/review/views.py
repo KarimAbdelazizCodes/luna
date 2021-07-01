@@ -1,6 +1,7 @@
 from rest_framework import status
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
 from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from restaurant.models import Restaurant
 from .models import Review
@@ -38,6 +39,7 @@ class CreateReview(CreateAPIView):
 class ListRestaurantReviews(ListAPIView):
     pagination_class = LimitOffsetPagination
     serializer_class = MainReviewSerializer
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         restaurant_id = self.kwargs['pk']
