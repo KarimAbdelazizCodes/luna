@@ -98,6 +98,20 @@ const CategoryDropdown = (props) => {
         dispatch(search(current, dispatchCategory));
     }, [category, current])
 
+    /*useEffect(() => {
+        dispatch(fetchCategories())
+        dispatch(search(current, keyword))
+    }, [keyword, current])
+
+    const clearState = (current) => {
+        const action = {
+            type: 'SEARCH_RESULTS',
+            payload: []
+        }
+        dispatch(action)
+        setCurrent(current)
+    }*/
+
     return (
         <DropdownWrapper>
            <input 

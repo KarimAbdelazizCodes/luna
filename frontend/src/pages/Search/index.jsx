@@ -46,7 +46,7 @@ const SearchPage = props => {
                                    value={keyword}
                                    onChange={(e) => setKeyword(e.target.value)}/>
                         </form>
-                        <CategoryDropdown categories={categories} current={current}/>
+                        <CategoryDropdown categories={categories} current={current} keyword={keyword} />
 
                         <select className="categories"
                                 onChange={(e) => setKeyword(e.target.value)}>
