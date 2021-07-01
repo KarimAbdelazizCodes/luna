@@ -6,7 +6,6 @@ const HeaderRightContainer = styled.div`
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     justify-content: flex-end;
     align-items: center;
 
@@ -31,7 +30,7 @@ const HeaderRightContainer = styled.div`
         margin-right: 25px;
         display: flex;
         min-width: 200px;
-        width: 20%;
+        width: 10%;
         justify-content: space-between;
 
         a {
