@@ -4,7 +4,8 @@ const initialState = {
     topRestaurants: [],
     searchResults: [],
     categories: [],
-    restaurant: []
+    restaurant: {},
+    reviews: []
 }
 
 const defaultReducer = (state=initialState, action) => {
@@ -26,6 +27,11 @@ const defaultReducer = (state=initialState, action) => {
             return {...state, categories: action.payload}
         case 'RESTAURANT':
             return {...state, restaurant: action.payload}
+        case 'RESTAURANT_REVIEWS':
+            return {...state, reviews: action.payload}
+        case 'DROP_KEY':
+            //console.log(action.payload)
+            return {...state, dropKey: action.payload}
         default:
             return state;
     }

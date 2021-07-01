@@ -11,7 +11,7 @@ const StaticWrapper = styled(RatingWrapper)`
 `
 
 const StaticRating = props => {
-    const [userTemplateRating, setTemplateUserRating] = useState(0)
+    const [userTemplateRating, setTemplateUserRating] = useState(props.rating)
     const overAllRating = props.average;
 
     return (

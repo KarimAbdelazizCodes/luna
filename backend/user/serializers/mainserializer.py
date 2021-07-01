@@ -24,6 +24,7 @@ class MainUserSerializer(serializers.ModelSerializer):
             'last_name',
             'about',
             'email',
+            'location',
             'phone_number',
             'hobbies',
             'number_of_comments',
