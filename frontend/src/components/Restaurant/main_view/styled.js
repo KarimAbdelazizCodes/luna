@@ -6,6 +6,33 @@ export const Upper = styled.div`
   background: url(${props => props.avatar});
   background-size: cover;
   margin-bottom: 15px;
+  position: relative;
+  
+  .location {
+    width: 20%;
+    height: 85%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    right: 100px;
+    top: 20px;
+    background: white;
+    
+    .contact {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 5px;
+      
+      span {
+        margin-left: 20px;
+      }
+      
+    }
+  }
   
   .info {
     display: flex;
@@ -69,6 +96,7 @@ export const Lower = styled.div`
     .filter {
       display: flex;
       width: 70%;
+      margin-bottom: 20px;
       
       input {
         background: white;

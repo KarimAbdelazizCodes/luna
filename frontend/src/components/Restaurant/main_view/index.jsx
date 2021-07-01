@@ -6,10 +6,14 @@ import money from '../../../assets/money.svg'
 import Reviews from "./reviews";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchReviews} from "../../../store/actions/restaurant_reviews";
-
+import pin from '../../../assets/pin.svg'
+import phone from '../../../assets/phone.svg'
+import web from '../../../assets/web.svg'
+import { withRouter} from "react-router";
 
 const MainRestaurantView = props => {
-    const { id, avatar, name, hours, price_level, number_of_reviews, average_rating, category } = props.restaurant
+    const { id, avatar, name, hours, price_level, number_of_reviews, average_rating, category, street,
+    phone_number, email } = props.restaurant
 
     const dispatch = useDispatch()
     const reviews = useSelector(state => state.defaultReducer.reviews)
@@ -29,6 +33,15 @@ const MainRestaurantView = props => {
         }
     }
 
+    const writeReview = () => {
+        const token = localStorage.getItem('token')
+        if (token) {
+            props.history.push(`/restaurant/write_review/?${id}`)
+        } else {
+            props.history.push('/signin')
+        }
+    }
+
     return (
         <>
             <Upper className='upper' avatar={avatar}>
@@ -38,6 +51,20 @@ const MainRestaurantView = props => {
                     <div className="ratings">
                         <StaticRating average={average_rating}/>
                         <span>{number_of_reviews} {number_of_reviews === 1 ? 'review' : 'reviews'}</span>
+                    </div>
+                </div>
+                <div className="location">
+                    <div className="contact">
+                        <img src={pin} alt='pin' />
+                        <span>{street}</span>
+                    </div>
+                    <div className="contact">
+                        <img src={phone} alt='pin' />
+                        <span>{phone_number}</span>
+                    </div>
+                    <div className="contact">
+                        <img src={web} alt='pin' />
+                        <span>{email}</span>
                     </div>
                 </div>
             </Upper>
@@ -63,7 +90,7 @@ const MainRestaurantView = props => {
                         <span>{convertPriceLevel(price_level)}</span>
                     </div>
                     <div className="write-reivew">
-                        <button>Write a review</button>
+                        <button onClick={writeReview}>Write a review</button>
                         <button>Edit Data</button>
                     </div>
                 </div>
@@ -73,4 +100,4 @@ const MainRestaurantView = props => {
     )
 }
 
-export default MainRestaurantView
+export default withRouter(MainRestaurantView)
