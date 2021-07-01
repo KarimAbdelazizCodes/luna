@@ -38,7 +38,10 @@ const Columnleft = styled.div`
     transform: translateY(-50%);
 
     .resizeProfile{
-    
+        /* padding-top: 10px;
+        padding-right: 17px; */
+        width: 260px;
+        height: 260px;
     }
 `
 const NameBox = styled.div`
@@ -66,8 +69,8 @@ const ColumnBar = styled.div`
 
 const Middlecolumn = styled.div`
     border: 2px solid green;
-    /* width: 100%;
-    height: 380px; */
+    width: 100%;
+    height: 380px;
     background-color: white;
 `
 
@@ -82,37 +85,22 @@ const Columnright = styled.div`
     border: 2px solid blue;
     margin-left: 50px;
     margin-right: 100px;
-    /* width: 260px;
-    height: 260px; */
+    
 `
 
 
 const ProfilPage = () => {
 
-    // const dispatch = useDispatch();
-    // const userData = useSelector(state => state.defaultReducer.userData);
+    const dispatch = useDispatch();
+    const userData = useSelector(state => state.defaultReducer.userData);
     
 
 
-    // useEffect(() => {
-    //     dispatch(fetchUserData())
-    // }, [dispatch])
+    useEffect(() => {
+        dispatch(fetchUserData())
+    }, [dispatch])
 
 
-
-
-    const userData = {
-        user_name: "Bob",
-        first_name: "Laurent",
-        last_name: "Haller",
-        location: "Zürich",
-        about: "Enjoy good Food",
-        date: "2.April",
-        hobbies: "Pizza",
-        number_of_reviews: 6,
-        number_of_comments: 210,
-        description: "Im professional photographer with an eye for details in every thing I do in my live. Every time a pass by a nice restaurant i have to stop and take notes",
-    }
 
 
     return (
@@ -127,7 +115,7 @@ const ProfilPage = () => {
                         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 20 }}>
                             <Columnleft>
 
-                                <img class="resizeProfile"src={ProfilePic} id="ProfilePic" alt="ProfilePic"></img>
+                                <img class="resizeProfile"src={userData.avatar} id="ProfilePic" alt="ProfilePic"></img>
                                 <NameBox>
                                     <h2>{userData.first_name}'s Profile</h2>
                                 </NameBox>
@@ -152,7 +140,7 @@ const ProfilPage = () => {
 
                             <Middlecolumn>
                                 <PersonalDetails>
-                                    <h2 style={{color: "white"}}>{userData.first_name} {userData.last_name[0]}.</h2>
+                                    <h2 style={{color: "white"}}>{userData.first_name} {userData.last_name}</h2>
                                     <h2 style={{color: "white"}}>{userData.location}</h2>
                                     <h2 style={{color: "white"}}>{userData.number_of_reviews} reviews</h2>
                                     <h2 style={{color: "white"}}>{userData.number_of_comments} comments</h2>
