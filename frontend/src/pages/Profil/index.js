@@ -89,95 +89,96 @@ const Columnright = styled.div`
 
 const ProfilPage = () => {
 
-    const dispatch = useDispatch();
-    const userData = useSelector(state => state.defaultReducer.userData);
+    // const dispatch = useDispatch();
+    // const userData = useSelector(state => state.defaultReducer.userData);
     
 
 
-    useEffect(() => {
-        dispatch(fetchUserData())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(fetchUserData())
+    // }, [dispatch])
 
 
 
 
-    // const userData = {
-    //     user_name: "Bob",
-    //     first_name: "Laurent",
-    //     last_name: "Haller",
-    //     location: "Zürich",
-    //     about: "Enjoy good Food",
-    //     date: "2.April",
-    //     hobbies: "Pizza",
-    //     number_of_reviews: 6,
-    //     number_of_comments: 210,
-    //     description: "Im professional photographer with an eye for details in every thing I do in my live. Every time a pass by a nice restaurant i have to stop and take notes",
-    // }
+    const userData = {
+        user_name: "Bob",
+        first_name: "Laurent",
+        last_name: "Haller",
+        location: "Zürich",
+        about: "Enjoy good Food",
+        date: "2.April",
+        hobbies: "Pizza",
+        number_of_reviews: 6,
+        number_of_comments: 210,
+        description: "Im professional photographer with an eye for details in every thing I do in my live. Every time a pass by a nice restaurant i have to stop and take notes",
+    }
 
 
     return (
         <>
             <Header />
-                <MainContainer>
-                    <Banner>
-                    <img class="resizeBanner" src={BannerPic} id="BannerImg" alt="banner"></img>
-                    </Banner>
                 
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 20 }}>
-                        <Columnleft>
+                <Banner>
+                    <img class="resizeBanner" src={BannerPic} id="BannerImg" alt="banner"></img>
+                </Banner>
+                
+                    <MainContainer>
+                        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 20 }}>
+                            <Columnleft>
 
-                            <img class="resizeProfile"src={ProfilePic} id="ProfilePic" alt="ProfilePic"></img>
-                            <NameBox>
-                                <h2>{userData.first_name}'s Profile</h2>
-                            </NameBox>
-                                <ColumnBar>
-                                    <img class="resize" src={Reviews} id="Reviews" alt="reviews"></img>
-                                    <p>Reviews</p>
-                                </ColumnBar>
-                                <ColumnBar>
-                                    <img class="resize" src={Comment} id="Comment" alt="comment"></img>
-                                    <p>Comment</p>
-                                </ColumnBar>
-                                <ColumnBar>
-                                    <img class="resize" src={Restaurant} id="Restaurant" alt="restaurant"></img>
-                                    <p>Restaurant</p>
-                                </ColumnBar>
-                                <ColumnBar>
-                                    <img class="resize" src={Edit} id="Edit" alt="edit"></img>
-                                    <p>Edit</p>
-                                </ColumnBar>
+                                <img class="resizeProfile"src={ProfilePic} id="ProfilePic" alt="ProfilePic"></img>
+                                <NameBox>
+                                    <h2>{userData.first_name}'s Profile</h2>
+                                </NameBox>
+                                    <ColumnBar>
+                                        <img class="resize" src={Reviews} id="Reviews" alt="reviews"></img>
+                                        <p>Reviews</p>
+                                    </ColumnBar>
+                                    <ColumnBar>
+                                        <img class="resize" src={Comment} id="Comment" alt="comment"></img>
+                                        <p>Comment</p>
+                                    </ColumnBar>
+                                    <ColumnBar>
+                                        <img class="resize" src={Restaurant} id="Restaurant" alt="restaurant"></img>
+                                        <p>Restaurant</p>
+                                    </ColumnBar>
+                                    <ColumnBar>
+                                        <img class="resize" src={Edit} id="Edit" alt="edit"></img>
+                                        <p>Edit</p>
+                                    </ColumnBar>
 
-                        </Columnleft>
+                            </Columnleft>
 
-                        <Middlecolumn>
-                            <PersonalDetails>
-                                <h2 style={{color: "white"}}>{userData.first_name} {userData.last_name[0]}.</h2>
-                                <h2 style={{color: "white"}}>{userData.location}</h2>
-                                <h2 style={{color: "white"}}>{userData.number_of_reviews} reviews</h2>
-                                <h2 style={{color: "white"}}>{userData.number_of_comments} comments</h2>
-                            </PersonalDetails>
-                            <h3 style={{color: "black"}}>Reviews</h3>
-                            
+                            <Middlecolumn>
+                                <PersonalDetails>
+                                    <h2 style={{color: "white"}}>{userData.first_name} {userData.last_name[0]}.</h2>
+                                    <h2 style={{color: "white"}}>{userData.location}</h2>
+                                    <h2 style={{color: "white"}}>{userData.number_of_reviews} reviews</h2>
+                                    <h2 style={{color: "white"}}>{userData.number_of_comments} comments</h2>
+                                </PersonalDetails>
+                                <h3 style={{color: "black"}}>Reviews</h3>
+                                
 
 
-                        </Middlecolumn>
+                            </Middlecolumn>
 
-                        <Columnright>
-                            <div>
-                                <h3 style={{color: "black"}}>About ...</h3>
-                                <p>{userData.about}</p>
-                                <h2 style={{color: "black"}}>Location</h2>
-                                <p>{userData.location}</p>
-                                <h2 style={{color: "black"}}>Luna member since</h2>
-                                <p>{userData.date}</p>
-                                <h2 style={{color: "black"}}>Things i love</h2>
-                                <p>{userData.hobbies}</p>
-                                <h2 style={{color: "black"}}>Description</h2>
-                                <p>{userData.description}</p>
-                            </div>
-                        </Columnright>
-                    </div>
-                </MainContainer>
+                            <Columnright>
+                                <div>
+                                    <h3 style={{color: "black"}}>About ...</h3>
+                                    <p>{userData.about}</p>
+                                    <h2 style={{color: "black"}}>Location</h2>
+                                    <p>{userData.location}</p>
+                                    <h2 style={{color: "black"}}>Luna member since</h2>
+                                    <p>{userData.date}</p>
+                                    <h2 style={{color: "black"}}>Things i love</h2>
+                                    <p>{userData.hobbies}</p>
+                                    <h2 style={{color: "black"}}>Description</h2>
+                                    <p>{userData.description}</p>
+                                </div>
+                            </Columnright>
+                        </div>
+                 </MainContainer>
             <Footer />
         </>
     )
