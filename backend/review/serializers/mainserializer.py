@@ -43,7 +43,7 @@ class MainReviewSerializer(serializers.ModelSerializer):
     number_of_likes = serializers.SerializerMethodField()
     number_of_comments = serializers.SerializerMethodField()
     latest_comments = serializers.SerializerMethodField()
-    created = serializers.DateTimeField(format="%d-%m-%Y %H:%M")
+    created = serializers.DateTimeField(format="%d-%m-%Y %H:%M", read_only=True)
 
     def get_latest_comments(self, obj):
         return obj.comments.values().order_by('-created')[:2]

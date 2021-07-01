@@ -1,12 +1,14 @@
 import {CommentWrapper} from "./styled";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 import {fetchComments} from "../../../../store/actions/review_comments";
+import {CreateComment} from "../../../../store/actions/new_comment";
 
 const Comments = props => {
 
     const dispatch = useDispatch()
     const comments = useSelector(state => state.defaultReducer.comments)
+    const commentRef = useRef()
 
     useEffect(() => {
         // clears the state then dispatch new comments
@@ -18,11 +20,18 @@ const Comments = props => {
         dispatch(fetchComments(props.id))
     },[dispatch])
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const text = commentRef.current.value
+        dispatch(CreateComment(props.id, text))
+        commentRef.current.value = ''
+    }
+
     return (
         <CommentWrapper>
             <div className="upper">
-                <form>
-                    <input type="text" placeholder="Write a comment..."/>
+                <form onSubmit={handleSubmit}>
+                    <input type="text" placeholder="Write a comment..." ref={commentRef}/>
                     <button type="submit">Post</button>
                 </form>
                 <span className="hide-comments" onClick={()=>props.hide(false)}>Hide</span>
