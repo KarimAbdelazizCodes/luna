@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { PageWrapper } from '../Login/styled';
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import Axios from '../../api';
+import {useDispatch, useSelector} from "react-redux";
+import {fetchCategories} from "../../store/actions/get_categories";
 
 
 const NewRestaurantWrapper = styled(PageWrapper)`
@@ -16,7 +18,7 @@ const NewRestaurantWrapper = styled(PageWrapper)`
   
 `
 
-const InputWrapper = styled.form`
+const InputWrapper = styled.div`
     
   
     input {
@@ -49,23 +51,56 @@ const Row = styled.div`
 
 
 const NewRestaurantPage = (props) => {
-
+    const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const categories = useSelector(state => state.defaultReducer.categories)
+    const [RestaurantImage, setRestaurantImage] = useState('');
+
+    useEffect(() => {
+        dispatch(fetchCategories())
+    }, [dispatch])
 
     const submitForm = async (data) => {
         const url = 'restaurants/new/';
-        console.log(data)
+        const formData = new FormData();
+
+        for (const [key, value] of Object.entries(data)) {
+            formData.append(key, value)
+        }
+
+        console.log(RestaurantImage)
+        formData.append("avatar", RestaurantImage);
+
+
+
+        const config = {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        };
         try {
-            const response = await Axios.post(url, data);
-            if (response.status === 200) {
-                props.history.push('/restaurants/')
+            const response = await Axios.post(url, formData, config);
+            if (response.status === 201) {
+                //props.history.push('/restaurant')
+                alert('success')
             } else {
-                console.log('error')
+                console.log(response.status)
             }
         } catch (error) {
             console.log('error:', error)
         }
     }
+
+    const realFileInput = React.useRef(null);
+    const replaceFileInput = (e) => {
+        e.preventDefault()
+        realFileInput.current.click()
+    }
+
+    const handlePostPic = (e) => {
+        e.preventDefault()
+        setRestaurantImage(e.target.files[0]);
+    }
+
+
 
 
 
@@ -84,7 +119,10 @@ const NewRestaurantPage = (props) => {
                             {errors.name && <p>{errors.name.message}</p>}
                         </InputWrapper>
                         <InputWrapper>
-                            <input placeholder='Category' type='text' {...register('category', { required: 'This field is required' })} />
+                            <select placeholder='Category' type='text' {...register('category', { required: 'This field is required' })} >
+                                <option>Select a category</option>
+                                {categories.map(category => <option key={category.id} value={category.id}>{category.category}</option>)}
+                            </select>
                             {errors.category && <p>{errors.category.message}</p>}
                         </InputWrapper>
                         <InputWrapper>
@@ -129,12 +167,18 @@ const NewRestaurantPage = (props) => {
                             {errors.hours && <p>{errors.hours.message}</p>}
                         </InputWrapper>
                         <InputWrapper>
-                            <input placeholder='Price level' type='text' {...register('price_level', { required: 'This field is required' })} />
+                            <select placeholder='Price level' type='number' {...register('price_level', { required: 'This field is required' })}>
+                                <option value={1}>$</option>
+                                <option value={2}>$$</option>
+                                <option value={3}>$$$</option>
+                            </select>
                             {errors.price && <p>{errors.price.message}</p>}
                         </InputWrapper>
                         <InputWrapper>
                             <div>
-                                <button type='submit'>CHOOSE A FILE...</button>
+                                <input type="file" style={{display: "none"}} ref={realFileInput} onChange={e => handlePostPic(e)} accept="image/png, image/jpeg" multiple/>
+                                <p>{RestaurantImage.name}</p>
+                                <button onClick={e => replaceFileInput(e)}>CHOOSE A FILE...</button>
                             </div>
                         </InputWrapper>
                     </Row>
