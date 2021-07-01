@@ -9,12 +9,7 @@ import {fetchReviews} from "../../../store/actions/restaurant_reviews";
 import pin from '../../../assets/pin.svg'
 import phone from '../../../assets/phone.svg'
 import web from '../../../assets/web.svg'
-
-const location = {
-  address: '1600 Amphitheatre Parkway, Mountain View, california.',
-  lat: 37.42216,
-  lng: -122.08427,
-}
+import { withRouter} from "react-router";
 
 const MainRestaurantView = props => {
     const { id, avatar, name, hours, price_level, number_of_reviews, average_rating, category, street,
@@ -35,6 +30,15 @@ const MainRestaurantView = props => {
                 return '$$'
             case '3':
                 return '$$$'
+        }
+    }
+
+    const writeReview = () => {
+        const token = localStorage.getItem('token')
+        if (token) {
+            props.history.push(`/restaurant/write_review/?${id}`)
+        } else {
+            props.history.push('/signin')
         }
     }
 
@@ -86,7 +90,7 @@ const MainRestaurantView = props => {
                         <span>{convertPriceLevel(price_level)}</span>
                     </div>
                     <div className="write-reivew">
-                        <button>Write a review</button>
+                        <button onClick={writeReview}>Write a review</button>
                         <button>Edit Data</button>
                     </div>
                 </div>
@@ -96,4 +100,4 @@ const MainRestaurantView = props => {
     )
 }
 
-export default MainRestaurantView
+export default withRouter(MainRestaurantView)
