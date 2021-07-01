@@ -1,5 +1,7 @@
 from rest_framework import status
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
+from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from comment.models import Comment
@@ -32,3 +34,19 @@ class DeleteComment(DestroyAPIView):
     queryset = Comment.objects.all()
     permission_classes = [IsAuthorOrSuperuserOrReadOnly]
     serializer_class = MainCommentSerializer
+
+
+class ListReviewComments(ListAPIView):
+    """
+    get:
+    retrieve comments for a particular review
+
+    Must pass review ID in URL
+    """
+    pagination_class = LimitOffsetPagination
+    serializer_class = MainCommentSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        review_id = self.kwargs['pk']
+        return Comment.objects.filter(review_id=review_id)

@@ -41,7 +41,7 @@ const ReviewCard = props => {
                         {number_of_likes} { number_of_likes === 1 ? 'like' : 'likes'}</button>
                 </div>
                 <div>
-                    <button>comment {number_of_comments}</button>
+                    <button>{number_of_comments} {number_of_comments === 1 ? 'comment' : 'comments'}</button>
                 </div>
             </div>
             <div className="latest-comments">

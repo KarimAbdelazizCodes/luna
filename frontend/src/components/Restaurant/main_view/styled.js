@@ -69,6 +69,7 @@ export const Lower = styled.div`
     .filter {
       display: flex;
       width: 70%;
+      margin-bottom: 20px;
       
       input {
         background: white;
