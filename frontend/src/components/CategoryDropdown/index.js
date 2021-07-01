@@ -61,8 +61,8 @@ const CategoryDropdown = (props) => {
     const dispatch = useDispatch()
     const [category, setCategory] = useState('Select a category...');
     const [focus, setFocus] = useState(false);
-    let categories = ['italian', 'french', 'texmex', 'indian', 'takeaway', 'english breakfast'];
-    //let categories = props.categories;
+    
+    let categories = props.categories;
     //categories.push('none');
 
 
@@ -90,27 +90,23 @@ const CategoryDropdown = (props) => {
         }
     }
 
+
     useEffect(() => {
-        let dispatchCategory = '';
+        let dispatchCategory = props.keyword;
         if (category != 'Select a category...') {
             dispatchCategory = category;
         }
+        
         dispatch(search(current, dispatchCategory));
-    }, [category, current])
+        dispatch({type:'DROP_KEY', payload:dispatchCategory })
+    }, [category, current]);
 
-    /*useEffect(() => {
-        dispatch(fetchCategories())
-        dispatch(search(current, keyword))
-    }, [keyword, current])
+    useEffect(() => {
+        setCategory('Select a category...')
+    }, [props.reset]);
 
-    const clearState = (current) => {
-        const action = {
-            type: 'SEARCH_RESULTS',
-            payload: []
-        }
-        dispatch(action)
-        setCurrent(current)
-    }*/
+    
+
 
     return (
         <DropdownWrapper>
@@ -131,7 +127,7 @@ const CategoryDropdown = (props) => {
                                 delay={(index*0.2).toString()+'s'}
                                 onClick={handleSelect}
                                 >
-                                    {category}
+                                    {category.category}
                             </CategoryButton>
                         </li>)
                     })

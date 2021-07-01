@@ -36,6 +36,10 @@ export const Wrapper = styled(PageWrapper)`
       border: ${(props) => props.theme.border};
       padding: 0 10px;
 
+      input {
+        height: 50px;
+      }
+
       .categories {
         background: none;
         border: none;

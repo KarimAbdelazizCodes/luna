@@ -15,11 +15,14 @@ const SearchPage = props => {
     const dispatch = useDispatch()
     const searchResults = useSelector(state => state.defaultReducer.searchResults)
     const categories = useSelector(state => state.defaultReducer.categories)
+    const dropKey = useSelector(state => state.defaultReducer.dropKey)
 
     let searchParams = props.location.search.split('=')[1]
     let defaultSearch = searchParams ? searchParams : ''
+    
     const [keyword, setKeyword] = useState(defaultSearch)
     const [current, setCurrent] = useState('restaurants')
+    const [resetCategory, setResetCategory] = useState(false)
 
     useEffect(() => {
         dispatch(fetchCategories())
@@ -35,6 +38,8 @@ const SearchPage = props => {
         setCurrent(current)
     }
 
+    useEffect(()=> setKeyword(dropKey),[dropKey])
+
     return (
         <Wrapper>
             <Header />
@@ -44,16 +49,17 @@ const SearchPage = props => {
                         <form>
                             <input type="text" placeholder="Search..."
                                    value={keyword}
-                                   onChange={(e) => setKeyword(e.target.value)}/>
+                                   onChange={(e) => {
+                                       setKeyword(e.target.value)
+                                       setResetCategory(!resetCategory);
+                                    }}
+                                   onFocus={(e) => e.target.select()}/>
                         </form>
-                        <CategoryDropdown categories={categories} current={current} keyword={keyword} />
-
-                        <select className="categories"
-                                onChange={(e) => setKeyword(e.target.value)}>
-                            <option>Select a category</option>
-                            {categories.map(category =>
-                                <option>{category.category}</option>)}
-                        </select>
+                        <CategoryDropdown 
+                            categories={categories} 
+                            current={current} 
+                            reset={resetCategory} 
+                            keyword={keyword}/>
                     </div>
 
                     <div className='views'>
