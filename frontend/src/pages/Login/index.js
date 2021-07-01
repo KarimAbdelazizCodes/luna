@@ -23,6 +23,7 @@ function LoginPage(props) {
             };
 
             await Axios.post(url, body);
+            
             props.history.push('/');    
         } catch {
             setMessage('no valid credentials provided');
