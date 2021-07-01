@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useRef} from "react";
 import {fetchComments} from "../../../../store/actions/review_comments";
 import {CreateComment} from "../../../../store/actions/new_comment";
+import { withRouter } from "react-router";
 
 const Comments = props => {
 
@@ -21,10 +22,16 @@ const Comments = props => {
     },[dispatch])
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        const text = commentRef.current.value
-        dispatch(CreateComment(props.id, text))
-        commentRef.current.value = ''
+        const token = localStorage.getItem('token')
+        if (token) {
+            e.preventDefault()
+            const text = commentRef.current.value
+            dispatch(CreateComment(props.id, text))
+            commentRef.current.value = ''
+        } else {
+            props.history.push('/signin')
+        }
+
     }
 
     return (
@@ -49,4 +56,4 @@ const Comments = props => {
     )
 }
 
-export default Comments
+export default withRouter(Comments)
