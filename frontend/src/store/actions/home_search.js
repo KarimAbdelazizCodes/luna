@@ -8,7 +8,7 @@ const topRestaurants = (data) => {
 }
 
 export const search = (type, search) => async(dispatch) => {
-    console.log(type)
+    //console.log(type)
     const url = `search/?type=${type}&search=${search}`
     const response = await Axios.get(url)
     dispatch(topRestaurants(response.data))

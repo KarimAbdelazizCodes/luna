@@ -29,9 +29,14 @@ const Wrapper = styled(Card)`
       align-items: center;
       margin: 5px;
     }
+
+    .avatar {
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+    }
   
     img {
-      width: 100%;
+      max-height: 100%;
     }
 `
 
