@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import BannerPic from "../../assets/zuerich-skyline.png";
@@ -8,6 +10,8 @@ import Reviews from "../../assets/reviews.svg";
 import Comment from "../../assets/comment.svg";
 import Restaurant from "../../assets/restaurant.svg";
 import Edit from "../../assets/edit.svg";
+import { fetchUserData } from "../../store/actions/get_userdata";
+import {fetchCategories} from "../../store/actions/get_categories";
 
 
 const Banner = styled.div`
@@ -85,18 +89,32 @@ const Columnright = styled.div`
 
 const ProfilPage = () => {
 
-    const userData = {
-        user_name: "Bob",
-        first_name: "Laurent",
-        last_name: "Haller",
-        location: "Zürich",
-        about: "Enjoy good Food",
-        date: "2.April",
-        hobbies: "Pizza",
-        number_of_reviews: 6,
-        number_of_comments: 210,
-        description: "Im professional photographer with an eye for details in every thing I do in my live. Every time a pass by a nice restaurant i have to stop and take notes",
-    }
+    const dispatch = useDispatch();
+    const userData = useSelector(state => state.defaultReducer.userData);
+    
+
+
+    useEffect(() => {
+        dispatch(fetchUserData())
+    }, [dispatch])
+
+
+
+
+    // const userData = {
+    //     user_name: "Bob",
+    //     first_name: "Laurent",
+    //     last_name: "Haller",
+    //     location: "Zürich",
+    //     about: "Enjoy good Food",
+    //     date: "2.April",
+    //     hobbies: "Pizza",
+    //     number_of_reviews: 6,
+    //     number_of_comments: 210,
+    //     description: "Im professional photographer with an eye for details in every thing I do in my live. Every time a pass by a nice restaurant i have to stop and take notes",
+    // }
+
+
     return (
         <>
             <Header />
