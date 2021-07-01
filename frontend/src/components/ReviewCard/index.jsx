@@ -2,6 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 import {Card} from "../../templates/Card";
 import Axios from "../../api";
+import defaultAvatar from '../../assets/avatar.svg'
 
 
 const Wrapper = styled(Card)`
@@ -17,14 +18,13 @@ const Wrapper = styled(Card)`
 
   .review-top {
     display: flex;
-    align-items: center;
     justify-content: flex-start;
     border-bottom: 1px solid lightgray;
 
     .name-reviews {
       display: flex;
       flex-direction: column;
-      padding-left: 10px;
+      padding: 10px 0 0 10px;
     }
 
     img {
@@ -80,7 +80,10 @@ const Wrapper = styled(Card)`
 
 const ReviewCard = props => {
     //destructuring props
-    const { id, author, restaurant, content, number_of_likes, number_of_comments, latest_comments } = props.review
+    const { id, content, number_of_likes, number_of_comments, latest_comments } = props.review
+    const restaurant = props.review.restaurant
+    const author = props.review.author
+    console.log(props.review)
 
     const toggleLikeUnlike = async (id) =>{
         const url = `reviews/like/${id}/`
@@ -90,12 +93,10 @@ const ReviewCard = props => {
         const response = await Axios.patch(url, null, config)
     }
 
-
-
     return(
         <Wrapper>
             <div className="review-top">
-                <img src={author.avatar} alt ='pp'/>
+                <img src={author['avatar'] ? author['avatar'] : defaultAvatar} alt ='pp'/>
                 <div className="name-reviews">
                     <span className="name">{author['first_name']} {author['last_name']}</span>
                     <span className="smaller-font">{author['number_of_reviews']} reviews in total</span>
@@ -105,7 +106,7 @@ const ReviewCard = props => {
 
             </div>
             <div className="content">
-                <span className="name">{restaurant.name}</span>
+                <span className="name">{restaurant['name']}</span>
                 <span className="review-content">{content}</span>
             </div>
             <div className="like-comment">
