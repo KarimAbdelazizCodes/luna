@@ -11,7 +11,8 @@ import Comment from "../../assets/comment.svg";
 import Restaurant from "../../assets/restaurant.svg";
 import Edit from "../../assets/edit.svg";
 import { fetchUserData } from "../../store/actions/get_userdata";
-import {fetchCategories} from "../../store/actions/get_categories";
+import { fetchUserReviews } from "../../store/actions/get_userreviews";
+
 
 
 const Banner = styled.div`
@@ -93,14 +94,14 @@ const ProfilPage = () => {
 
     const dispatch = useDispatch();
     const userData = useSelector(state => state.defaultReducer.userData);
-    
+    const userReviews = useSelector(state => state.defaultReducer.userReviews)
 
 
     useEffect(() => {
         dispatch(fetchUserData())
+        dispatch(fetchUserReviews(1))
+        console.log(userReviews)
     }, [dispatch])
-
-
 
 
     return (
@@ -122,6 +123,7 @@ const ProfilPage = () => {
                                     <ColumnBar>
                                         <img class="resize" src={Reviews} id="Reviews" alt="reviews"></img>
                                         <p>Reviews</p>
+                                        {/* <p>{userReviews}</p> */}
                                     </ColumnBar>
                                     <ColumnBar>
                                         <img class="resize" src={Comment} id="Comment" alt="comment"></img>

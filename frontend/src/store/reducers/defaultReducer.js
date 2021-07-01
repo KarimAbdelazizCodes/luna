@@ -27,6 +27,8 @@ const defaultReducer = (state=initialState, action) => {
             return {...state, categories: action.payload}
         case 'USERDATA':
             return {...state, userData: action.payload}
+        case 'USERREVIEWS':
+            return {...state, userReviews: action.payload}
         case 'RESTAURANT':
             return {...state, restaurant: action.payload}
         default:
