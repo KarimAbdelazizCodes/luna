@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from comment.serializers.serializer import MainCommentSerializer
 from restaurant.models import Restaurant
 from review.models import Review
 from django.contrib.auth import get_user_model
@@ -21,6 +22,7 @@ class UserReviewSerializer(serializers.ModelSerializer):
             'id',
             'first_name',
             'last_name',
+            'username',
             'number_of_reviews',
             'avatar'
         ]
@@ -38,6 +40,7 @@ class NestedRestaurantSerializer(serializers.ModelSerializer):
 class MainReviewSerializer(serializers.ModelSerializer):
     author = UserReviewSerializer(read_only=True)
     restaurant = NestedRestaurantSerializer(read_only=True)
+    # comments = MainCommentSerializer(read_only=True)
     number_of_likes = serializers.SerializerMethodField()
     number_of_comments = serializers.SerializerMethodField()
     latest_comments = serializers.SerializerMethodField()
