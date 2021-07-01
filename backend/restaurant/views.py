@@ -122,7 +122,9 @@ class Search(ListAPIView):
                                        Q(username__icontains=search))
         else:
             return Review.objects.filter(Q(content__icontains=search) |
-                                         Q(author__username__icontains=search))
+                                         Q(author__username__icontains=search) |
+                                         Q(author__first_name__icontains=search) |
+                                         Q(author__last_name__icontains=search))
 
 
 class ListBestRestaurantsView(ListAPIView):

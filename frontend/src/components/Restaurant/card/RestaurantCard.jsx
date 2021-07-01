@@ -1,8 +1,8 @@
 import React from "react";
 import styled from 'styled-components';
-import {Card} from "../../templates/Card";
+import {Card} from "../../../templates/Card";
 import { withRouter } from "react-router";
-import StaticRating from "../Rating/static";
+import StaticRating from "../../Rating/static";
 
 
 const Wrapper = styled(Card)`
