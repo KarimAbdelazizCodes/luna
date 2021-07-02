@@ -10,6 +10,7 @@ import pin from '../../../assets/pin.svg'
 import phone from '../../../assets/phone.svg'
 import web from '../../../assets/web.svg'
 import { withRouter} from "react-router";
+import { fetchUserData } from '../../../store/actions/get_userdata';
 import Location from "../../google_map/map";
 
 const MainRestaurantView = props => {
@@ -37,6 +38,10 @@ const MainRestaurantView = props => {
             props.history.push('/signin')
         }
     }
+
+    useEffect(() => {
+        dispatch(fetchUserData());
+    },[])
 
     return (
         <>

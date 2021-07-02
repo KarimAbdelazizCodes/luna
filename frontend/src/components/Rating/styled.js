@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import ratingStar from '../../assets/star.svg'
+import ratingStar from '../../assets/reviews.svg'
 
 export const RatingWrapper = styled.div`
     --unit: ${(props)=> props.theme.defaultHeight};

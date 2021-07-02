@@ -4,9 +4,9 @@ import ratingStar from '../../assets/star.svg'
 import { useState } from 'react'
 
 
-const Rating = () => {
+const Rating = (props) => {
     const [userTemplateRating, setTemplateUserRating] = useState(0)
-    const overAllRating = 2.5;
+    const overAllRating = props.average;
 
     const handleTemplateRating = (e) => {
         if (e.type === 'mouseenter') {
