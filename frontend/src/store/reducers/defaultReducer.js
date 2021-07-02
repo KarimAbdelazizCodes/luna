@@ -46,7 +46,6 @@ const defaultReducer = (state=initialState, action) => {
         case 'NEW_COMMENT':
             return {...state, comments: [action.payload, ...state.comments]}
         case 'DROP_KEY':
-            //console.log(action.payload)
             return {...state, dropKey: action.payload}
         default:
             return state;

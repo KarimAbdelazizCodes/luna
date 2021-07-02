@@ -50,10 +50,6 @@ const MainRestaurantView = props => {
         }
     }
 
-    useEffect(() => {
-        dispatch(fetchUserData());
-    },[])
-
     return (
         <>
             <Upper className='upper' avatar={avatar}>
