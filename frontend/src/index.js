@@ -30,6 +30,7 @@ import EditPorfilPage from './pages/EditProfil';
 import RestaurantsProfil from './pages/RestaurantsProfil';
 import NewRestaurantPage from './pages/NewRestaurant';
 import CommentsProfilPage from './pages/CommentsProfil';
+import { withUserAccess } from "./hoc/withReviews";
 
 const token = localStorage.getItem('token')
 if(token) store.dispatch({type: 'ADD_TOKEN', payload: token})
@@ -45,7 +46,7 @@ ReactDOM.render(
             <Route exact path='/search' component={SearchPage} />
 
             <Route exact path='/restaurant' component={RestaurantPage} />
-            <Route exact path='/restaurant/write_review' component={WriteReviewPage} />
+            <Route exact path='/restaurant/write_review' component={withUserAccess(WriteReviewPage)} />
 
             <Route exact path='/signin' component={LoginPage} />
             <Route exact path='/signup' component={SignUpPage} />

@@ -6,11 +6,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchRestaurant} from "../../store/actions/get_restaurant";
 import MainRestaurantView from "../../components/Restaurant/main_view";
 import styled from "styled-components";
+import {fetchReviews} from "../../store/actions/restaurant_reviews";
 
 const Container = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
+  align-items: flex-start;
   width: 100%;
 `
 
@@ -21,6 +23,7 @@ const RestaurantPage = props => {
     useEffect(() => {
         let restaurant_id = props.location.search.split('=')[1]
         dispatch(fetchRestaurant(restaurant_id))
+        dispatch(fetchReviews(restaurant_id))
     }, [dispatch])
     return (
 

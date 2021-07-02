@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from comment.serializers.serializer import MainCommentSerializer
+from comment.models import Comment
+from comment.serializers.serializer import MainCommentSerializer, LatestCommentsSerializer
 from restaurant.models import Restaurant
 from review.models import Review
 from django.contrib.auth import get_user_model
@@ -46,7 +47,8 @@ class MainReviewSerializer(serializers.ModelSerializer):
     created = serializers.DateTimeField(format="%d-%m-%Y %H:%M", read_only=True)
 
     def get_latest_comments(self, obj):
-        return obj.comments.values().order_by('-created')[:2]
+        comments = obj.comments.all().order_by('-created')[:2]
+        return MainCommentSerializer(comments, many=True).data
 
     def get_number_of_likes(self, obj):
         return obj.liked_by.count()

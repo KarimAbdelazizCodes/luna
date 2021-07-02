@@ -1,30 +1,20 @@
-import React from 'react'
-import GoogleMapReact from 'google-map-react'
-import {MapWrapper} from "./styled";
-import MapLocation from "./location_pin";
+import React from "react";
+import { MapContainer, Marker, TileLayer } from "react-leaflet"
+import { MapWrapper } from './styled'
 
-
-const Map = ({ location, zoomLevel }) => {
+const Location = props => {
 
     return (
         <MapWrapper>
-            <div className="map">
-                <div className="google-map">
-                    <GoogleMapReact
-                        bootstrapURLKeys={{ key: 'AIzaSyBG_jJSsEYcf6reCLCFlVD_Z8VyYvZQMgk' }}
-                        defaultCenter={location}
-                        defaultZoom={zoomLevel}
-                    >
-                        <MapLocation
-                            lat={location.lat}
-                            lng={location.lng}
-                            text={location.address}
-                        />
-                    </GoogleMapReact>
-                </div>
-            </div>
+            <MapContainer  center={[47.376888, 8.541694]} zoom={15}>
+                <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                />
+                <Marker position={[47.376888, 8.541694]}/>
+            </MapContainer>
         </MapWrapper>
     )
 }
 
-export default Map
+export default Location
