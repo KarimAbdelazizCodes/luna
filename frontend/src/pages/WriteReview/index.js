@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { PageWrapper } from '../Login/styled';
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -7,6 +7,8 @@ import Rating from '../../components/Rating';
 import StaticRating from '../../components/Rating/static';
 import styled from 'styled-components';
 import tempBackground from '../../assets/homepage.jpg';
+import { fetchRestaurant } from '../../store/actions/get_restaurant';
+
 
 
 
@@ -84,7 +86,10 @@ const MakeRevieWrapper = styled.div`
 
 `
 
-const WriteReviewPage = () => {
+const WriteReviewPage = (props) => {
+    const dispatch = useDispatch()
+    const restaurant_id = props.location.search[1];
+    const state = useSelector(state => state.defaultReducer)
     
     const [content , setContent] = useState("")
     const defaultTxt = "Your review helps others learn about great local businesses. Please don't review this business if you received a freebie for writing this review, or if you're connected in any way to the owner or employees.";
@@ -104,23 +109,29 @@ const WriteReviewPage = () => {
         content ? setPalceholder("Your review") : setPalceholder(defaultTxt);
     },[content])
 
+    useEffect(() => {
+        dispatch(fetchRestaurant(restaurant_id))
+    }, [])
+
 
     return (
         <PageWrapper>
             <Header />
             <main>
+                { state.restaurant.category &&
                 <MakeRevieWrapper>
+                    
                     <div className='banner'>
                         <img src={tempBackground}></img>
                         <article>
-                            <h1>Läderach Chocolatier Suisse</h1>
-                            <h2>Chocolatiers & Shops</h2>
+                            <h1>{state.restaurant.name}</h1>
+                            {<h2>{state.restaurant.category.category}</h2>}
                             <StaticRating/>
-                            <p>68 Reviews</p>
+                            <p>{state.restaurant.number_of_reviews} Reviews</p>
                         </article>
                     </div>
                     <form>
-                        <Rating/>
+                        <Rating averege={state.restaurant.average_rating}/>
                         <p>Select your rating</p>
                         <div className='inputWrapper'>
                             <textarea 
@@ -133,12 +144,8 @@ const WriteReviewPage = () => {
                         <button
                         onClick={handleSubmit}>submit</button>
                     </form>
-                       
-
-
-
-                    
                 </MakeRevieWrapper>
+                }
             </main>
             <Footer />
         </PageWrapper>
