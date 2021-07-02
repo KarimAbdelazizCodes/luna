@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Lower, Upper} from "./styled";
 import StaticRating from "../../Rating/static";
 import clock from '../../../assets/clock.svg'
@@ -11,12 +11,23 @@ import phone from '../../../assets/phone.svg'
 import web from '../../../assets/web.svg'
 import { withRouter} from "react-router";
 import Location from "../../google_map/map";
+import Axios from "../../../api";
 
 const MainRestaurantView = props => {
     const { id, avatar, name, hours, price_level, number_of_reviews, average_rating, category, street,
-    phone_number, email } = props.restaurant
+        zip, phone_number, email } = props.restaurant
 
     const reviews = useSelector(state => state.defaultReducer.reviews)
+
+    const [latitude, setLat] = useState(0)
+    const [longtitude, setLon] = useState(0)
+
+    useEffect(async()=> {
+        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${street} ${zip}`
+        const response = await Axios.get(url)
+        setLat(parseFloat(response.data[0].lat))
+        setLon(parseFloat(response.data[0].lon))
+    },[latitude])
 
     const convertPriceLevel = price => {
         switch(price){
@@ -50,7 +61,7 @@ const MainRestaurantView = props => {
                     </div>
                 </div>
                 <div className="location">
-                    <Location/>
+                    <Location lat={latitude} lon={longtitude}/>
                     <div className="contact">
                         <img src={pin} alt='pin' />
                         <span>{street}</span>
