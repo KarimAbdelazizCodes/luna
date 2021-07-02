@@ -32,7 +32,7 @@ const NewRestaurantPage = (props) => {
         try {
             const response = await Axios.post(url, formData, config);
             if (response.status === 201) {
-                props.history.push('/user/restaurants/')
+                props.history.push('/user/')
             } else {
                 console.log(response.status)
             }

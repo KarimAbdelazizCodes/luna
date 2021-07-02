@@ -9,11 +9,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchCategories} from "../../store/actions/get_categories";
 import {Wrapper} from "./styled";
 import Edit from '../../assets/edit.svg'
+import { useHistory, Link } from "react-router-dom";
+
 
 const NewRestaurantPage = (props) => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [UserImage, setUserImage] = useState('');
+    const history = useHistory();
 
     // TODO: fill form with initial state to not overwrite data ( axios or redux or props)
 
@@ -22,16 +25,16 @@ const NewRestaurantPage = (props) => {
         const url = 'me/';
         const formData = new FormData();
         for (const [key, value] of Object.entries(data)) {
-            formData.append(key, value)
+            if (value !== '') formData.append(key, value)
         }
-        formData.append("avatar", UserImage);
+        if (UserImage) formData.append("avatar", UserImage);
         const config = {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         };
         try {
             const response = await Axios.patch(url, formData, config);
-            if (response.status === 201) {
-                console.log('updated!')
+            if (response.status === 200) {
+                history.push('/user/');
             } else {
                 console.log(response.status)
             }
