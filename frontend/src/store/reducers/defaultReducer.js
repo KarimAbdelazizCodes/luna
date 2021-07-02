@@ -4,9 +4,11 @@ const initialState = {
     topRestaurants: [],
     searchResults: [],
     categories: [],
+    userData: [],
     restaurant: {},
     reviews: [],
-    comments: []
+    comments: [],
+    userReviews: [],
 }
 
 const defaultReducer = (state=initialState, action) => {
@@ -26,6 +28,10 @@ const defaultReducer = (state=initialState, action) => {
             return {...state, searchResults: action.payload}
         case 'CATEGORIES':
             return {...state, categories: action.payload}
+        case 'USERDATA':
+            return {...state, userData: action.payload}
+        case 'USERREVIEWS':
+            return {...state, userReviews: action.payload}
         case 'RESTAURANT':
             return {...state, restaurant: action.payload}
         case 'RESTAURANT_REVIEWS':
