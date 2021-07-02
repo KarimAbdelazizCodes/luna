@@ -7,6 +7,7 @@ import {fetchRestaurant} from "../../store/actions/get_restaurant";
 import MainRestaurantView from "../../components/Restaurant/main_view";
 import styled from "styled-components";
 import {fetchReviews} from "../../store/actions/restaurant_reviews";
+import { useHistory } from "react-router";
 
 const Container = styled.div`
   display: flex;

@@ -44,7 +44,7 @@ const MainRestaurantView = props => {
     const writeReview = () => {
         const token = localStorage.getItem('token')
         if (token) {
-            props.history.push(`/restaurant/write_review/?${id}`)
+            props.history.push(`/restaurant/write_review/?id=${id}`)
         } else {
             props.history.push('/signin')
         }
