@@ -10,6 +10,7 @@ import tempBackground from '../../assets/homepage.jpg';
 import { fetchRestaurant } from '../../store/actions/get_restaurant';
 import { fetchUserData } from '../../store/actions/get_userdata';
 import Axios from "../../api";
+import {useHistory, withRouter} from "react-router";
 
 
 
@@ -87,9 +88,10 @@ const MakeRevieWrapper = styled.div`
 
 `
 
-const WriteReviewPage = (props) => {
+const WriteReviewPage = props => {
     const dispatch = useDispatch()
-    const restaurant_id = props.location.search[1];
+    let restaurant_id = props.location.search.split('=')[1]
+    console.log(props)
     const state = useSelector(state => state.defaultReducer)
     
     const [content , setContent] = useState("")
@@ -97,9 +99,7 @@ const WriteReviewPage = (props) => {
     const [placeholder, setPalceholder] = useState(defaultTxt);
 
     const handleInputChange = (e) => {
-        //console.log(e.target.value)
         setContent(e.target.value);
-
     }
 
     const handleSubmit = async (e) => {
@@ -140,7 +140,7 @@ const WriteReviewPage = (props) => {
                 <MakeRevieWrapper>
                     
                     <div className='banner'>
-                        <img alt='banner' src={state.restaurant.avatar ? state.restaurant.avatar : tempBackground}></img>
+                        <img alt='banner' src={state.restaurant.avatar ? state.restaurant.avatar : tempBackground}/>
                         <article>
                             <h1>{state.restaurant.name}</h1>
                             {<h2>{state.restaurant.category.category}</h2>}
@@ -170,4 +170,4 @@ const WriteReviewPage = (props) => {
     )
 }
 
-export default WriteReviewPage;
+export default withRouter(WriteReviewPage);
