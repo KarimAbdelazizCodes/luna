@@ -15,6 +15,7 @@ export const Search = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 280px;
     
     input {
       width: 500px;
