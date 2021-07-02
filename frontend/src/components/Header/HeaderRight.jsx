@@ -1,5 +1,6 @@
 import { useHistory, Link } from "react-router-dom";
 import styled from 'styled-components';
+import {useDispatch, useSelector} from "react-redux";
 
 
 const HeaderRightContainer = styled.div`
@@ -62,6 +63,8 @@ const HeaderRightContainer = styled.div`
 
 const HeaderRight = () => {
     const history = useHistory()
+    const token = useSelector(state => state.defaultReducer.token);
+    const dispatch = useDispatch()
 
     
 
@@ -72,6 +75,11 @@ const HeaderRight = () => {
                break;
             case 'to-signup':
                 history.push('/signup');
+                break;
+            case 'sign-out':
+                localStorage.removeItem('token')
+                dispatch({type: 'ADD_TOKEN', payload: ''})
+                history.push('/signin');
                 break;
             default:
                 break;
@@ -92,11 +100,21 @@ const HeaderRight = () => {
                 name='to-signup'
                 onClick={handleClick}>
                     signup</button>
-            <button 
-                id='right-side'
-                name='to-signin'
-                onClick={handleClick}>
-                    signin</button>
+            {
+                token ?
+                    <button
+                        id='right-side'
+                        name='sign-out'
+                        onClick={handleClick}>
+                        logout</button>
+                    :
+                    <button
+                        id='right-side'
+                        name='to-signin'
+                        onClick={handleClick}>
+                        login</button>
+            }
+
         </div>
 
     </HeaderRightContainer>

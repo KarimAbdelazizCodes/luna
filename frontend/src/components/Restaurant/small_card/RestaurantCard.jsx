@@ -82,4 +82,4 @@ const RestaurantCard = props => {
     );
 }
 
-export default  withRouter(RestaurantCard);
+export default withRouter(RestaurantCard);
