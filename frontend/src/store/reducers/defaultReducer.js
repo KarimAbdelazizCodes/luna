@@ -7,7 +7,8 @@ const initialState = {
     userData: [],
     restaurant: {},
     reviews: [],
-    comments: []
+    comments: [],
+    userReviews: [],
 }
 
 const defaultReducer = (state=initialState, action) => {

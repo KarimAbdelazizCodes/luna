@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { useHistory, Link } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import BannerPic from "../../assets/zuerich-skyline.png";
@@ -12,6 +13,7 @@ import Restaurant from "../../assets/restaurant.svg";
 import Edit from "../../assets/edit.svg";
 import { fetchUserData } from "../../store/actions/get_userdata";
 import { fetchUserReviews } from "../../store/actions/get_userreviews";
+import ReviewCard from "../../components/ReviewCard";
 
 
 
@@ -73,13 +75,23 @@ const Middlecolumn = styled.div`
     width: 100%;
     height: 380px;
     background-color: white;
+    margin-bottom: 30px;
 `
 
 const PersonalDetails = styled.div`
     border: 2px solid yellow;
     position: relative;
-    transform: translateY(-120%);
+    text-align: center;
+    background-image: url(${props=>props.imgUrl});
+    /* width: 100%; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 30vh;
 
+    .resizeBanner{
+        width: 100%;
+    }
 `
 
 const Columnright = styled.div`
@@ -95,22 +107,52 @@ const ProfilPage = () => {
     const dispatch = useDispatch();
     const userData = useSelector(state => state.defaultReducer.userData);
     const userReviews = useSelector(state => state.defaultReducer.userReviews)
+    const history = useHistory()
+
+    const [tab, setTab] = useState('Reviews')
 
 
     useEffect(() => {
         dispatch(fetchUserData())
-        dispatch(fetchUserReviews(1))
-        console.log(userReviews)
-    }, [dispatch])
+    }, [])
+
+    useEffect(() => {
+        dispatch(fetchUserReviews(userData.id)) 
+    }, [userData])
+
+    const showComments = () => {
+        setTab('Comments');
+    }
+
+    const showReviews = () => {
+        setTab('Reviews');
+    }
+
+    const showRestaurants = () => {
+        setTab('Restaurants');
+    }
+
+    const editUser = () => {
+        history.push('/user/edit');
+    }
+
+
+
 
 
     return (
         <>
             <Header />
                 
-                <Banner>
+                {/* <Banner>
                     <img class="resizeBanner" src={BannerPic} id="BannerImg" alt="banner"></img>
-                </Banner>
+                </Banner> */}
+                <PersonalDetails imgUrl={BannerPic}>
+                                    <h2 style={{color: "white"}}>{userData.first_name} {userData.last_name}</h2>
+                                    <h2 style={{color: "white"}}>{userData.location}</h2>
+                                    <h2 style={{color: "white"}}>{userData.number_of_reviews} reviews</h2>
+                                    <h2 style={{color: "white"}}>{userData.number_of_comments} comments</h2>
+                </PersonalDetails>
                 
                     <MainContainer>
                         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 20 }}>
@@ -122,35 +164,37 @@ const ProfilPage = () => {
                                 </NameBox>
                                     <ColumnBar>
                                         <img class="resize" src={Reviews} id="Reviews" alt="reviews"></img>
-                                        <p>Reviews</p>
-                                        {/* <p>{userReviews}</p> */}
+                                        <p onClick={showReviews}>Reviews</p>
                                     </ColumnBar>
                                     <ColumnBar>
                                         <img class="resize" src={Comment} id="Comment" alt="comment"></img>
-                                        <p>Comment</p>
+                                        <p onClick={showComments}>Comment</p>
                                     </ColumnBar>
                                     <ColumnBar>
                                         <img class="resize" src={Restaurant} id="Restaurant" alt="restaurant"></img>
-                                        <p>Restaurant</p>
+                                        <p onClick={showRestaurants}>Restaurant</p>
                                     </ColumnBar>
                                     <ColumnBar>
                                         <img class="resize" src={Edit} id="Edit" alt="edit"></img>
-                                        <p>Edit</p>
+                                        <p onClick={editUser}>Edit</p>
                                     </ColumnBar>
 
                             </Columnleft>
 
                             <Middlecolumn>
-                                <PersonalDetails>
-                                    <h2 style={{color: "white"}}>{userData.first_name} {userData.last_name}</h2>
-                                    <h2 style={{color: "white"}}>{userData.location}</h2>
-                                    <h2 style={{color: "white"}}>{userData.number_of_reviews} reviews</h2>
-                                    <h2 style={{color: "white"}}>{userData.number_of_comments} comments</h2>
-                                </PersonalDetails>
-                                <h3 style={{color: "black"}}>Reviews</h3>
-                                
-
-
+                                <h3 style={{color: "black"}}>{tab}</h3>
+                                {
+                                    tab === 'Reviews' ? userReviews.map((result, index) =>
+                                    <ReviewCard key={index} review={result} />): null 
+                                }
+                                {
+                                    tab === 'Comments' ? userReviews.map((result, index) =>
+                                    <ReviewCard key={index} review={result} />): null 
+                                }
+                                {
+                                    tab === 'Restaurants' ? userReviews.map((result, index) =>
+                                    <ReviewCard key={index} review={result} />): null 
+                                }
                             </Middlecolumn>
 
                             <Columnright>
