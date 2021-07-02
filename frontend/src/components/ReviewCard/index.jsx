@@ -2,6 +2,7 @@ import React from "react";
 import Axios from "../../api";
 import defaultAvatar from '../../assets/avatar.svg'
 import { Wrapper } from './styled'
+import {withRouter} from "react-router";
 
 
 const ReviewCard = props => {
@@ -19,6 +20,10 @@ const ReviewCard = props => {
         const response = await Axios.patch(url, null, config)
     }
 
+    const restaurantPage = () => {
+        props.history.push(`/restaurant/?id=${restaurant.id}`)
+    }
+
     return(
         <Wrapper>
             <div className="review-top">
@@ -32,7 +37,7 @@ const ReviewCard = props => {
 
             </div>
             <div className="content">
-                <span className="name">{restaurant['name']}</span>
+                <span onClick={restaurantPage} className="name restaurant">{restaurant['name']}</span>
                 <span className="review-content">{content}</span>
             </div>
             <div className="like-comment">
@@ -48,8 +53,8 @@ const ReviewCard = props => {
                 <span>Latest comments</span>
                 {latest_comments ? latest_comments.map(comment =>
                     <>
-                        <span>{comment.author_id}</span>
-                        <span>{comment.text}</span>
+                        <span className="comment-author">{comment.author.first_name} {comment.author.last_name}</span>
+                        <span className="comment-text">{comment.text}</span>
                     </>
                 ) : null}
             </div>
@@ -57,4 +62,4 @@ const ReviewCard = props => {
     );
 }
 
-export default ReviewCard;
+export default withRouter(ReviewCard);

@@ -3,6 +3,7 @@ import ratingStar from '../../assets/star.svg'
 
 export const RatingWrapper = styled.div`
     --unit: ${(props)=> props.theme.defaultHeight};
+    position: relative;
 
     display: flex;
     flex-direction: row;
