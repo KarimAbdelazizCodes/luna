@@ -5,7 +5,7 @@ import defaultAvatar from '../../assets/avatar.svg'
 
 
 const Wrapper = styled(Card)`
-  
+  min-height: 250px;
   .name{
     font-weight: 600;
     color: darkorange;

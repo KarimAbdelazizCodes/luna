@@ -11,17 +11,13 @@ import phone from '../../../assets/phone.svg'
 import web from '../../../assets/web.svg'
 import { withRouter} from "react-router";
 import { fetchUserData } from '../../../store/actions/get_userdata';
+import Location from "../../google_map/map";
 
 const MainRestaurantView = props => {
     const { id, avatar, name, hours, price_level, number_of_reviews, average_rating, category, street,
     phone_number, email } = props.restaurant
 
-    const dispatch = useDispatch()
     const reviews = useSelector(state => state.defaultReducer.reviews)
-
-    useEffect(() => {
-        dispatch(fetchReviews(id))
-    }, [dispatch])
 
     const convertPriceLevel = price => {
         switch(price){
@@ -59,6 +55,7 @@ const MainRestaurantView = props => {
                     </div>
                 </div>
                 <div className="location">
+                    <Location/>
                     <div className="contact">
                         <img src={pin} alt='pin' />
                         <span>{street}</span>
