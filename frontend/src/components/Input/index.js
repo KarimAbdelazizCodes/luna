@@ -35,7 +35,7 @@ const Input = (props)  => {
     }
     
     return (
-        <InputWrapper searchFocus={focus}>
+        <InputWrapper className='input-wrapper' searchFocus={focus}>
         <label className='template' htmlFor={props.name}>{props.placeholder}</label>
         <input
         onFocus={activeHandler}

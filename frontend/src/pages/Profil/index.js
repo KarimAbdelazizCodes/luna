@@ -13,13 +13,14 @@ import Restaurant from "../../assets/restaurant.svg";
 import Edit from "../../assets/edit.svg";
 import { fetchUserData } from "../../store/actions/get_userdata";
 import { fetchUserReviews } from "../../store/actions/get_userreviews";
+import { fetchUserComments } from "../../store/actions/get_comments";
+import { fetchUserRestaurant } from "../../store/actions/get_userrestaurants";
 import ReviewCard from "../../components/ReviewCard";
+import RestaurantCard from "../../components/Restaurant/small_card/RestaurantCard";
 
 
 
 const Banner = styled.div`
-    border: 2px solid red;
-    /* width: 100%; */
     background-size: cover;
 
     .resizeBanner{
@@ -27,13 +28,11 @@ const Banner = styled.div`
     }
 `
 const MainContainer = styled.div`
-    border: 2px solid black;
     width: 100%;
     height: 1100px;
 `
 
 const Columnleft = styled.div`
-    border: 2px solid green;
     margin-left: 100px;
     width: 260px;
     height: 260px;
@@ -71,15 +70,41 @@ const ColumnBar = styled.div`
 `
 
 const Middlecolumn = styled.div`
-    border: 2px solid green;
     width: 100%;
-    height: 380px;
     background-color: white;
     margin-bottom: 30px;
+    
+    .comment-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+    border-bottom: 1px solid lightgray;
+    
+    .time-stamp {
+        font-size: 12px;
+      }
+    
+    .comment-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      
+      .commenter{
+        font-weight: 700;
+        font-size: 15px;
+        color: darkorange;
+        margin-bottom: 5px;
+      }
+      .comment-text {
+        font-size: 14px;
+      }
+    }
+  }
 `
 
 const PersonalDetails = styled.div`
-    border: 2px solid yellow;
     position: relative;
     text-align: center;
     background-image: url(${props=>props.imgUrl});
@@ -95,7 +120,6 @@ const PersonalDetails = styled.div`
 `
 
 const Columnright = styled.div`
-    border: 2px solid blue;
     margin-left: 50px;
     margin-right: 100px;
     
@@ -106,8 +130,10 @@ const ProfilPage = () => {
 
     const dispatch = useDispatch();
     const userData = useSelector(state => state.defaultReducer.userData);
-    const userReviews = useSelector(state => state.defaultReducer.userReviews)
-    const history = useHistory()
+    const userReviews = useSelector(state => state.defaultReducer.userReviews);
+    const userComments = useSelector(state => state.defaultReducer.userComments);
+    const userRestaurant = useSelector(state => state.defaultReducer.userRestaurant);
+    const history = useHistory();
 
     const [tab, setTab] = useState('Reviews')
 
@@ -117,7 +143,9 @@ const ProfilPage = () => {
     }, [])
 
     useEffect(() => {
-        dispatch(fetchUserReviews(userData.id)) 
+        dispatch(fetchUserReviews(userData.id))
+        dispatch(fetchUserComments(userData.id))
+        dispatch(fetchUserRestaurant(userData.id))
     }, [userData])
 
     const showComments = () => {
@@ -134,6 +162,10 @@ const ProfilPage = () => {
 
     const editUser = () => {
         history.push('/user/edit');
+    }
+
+    const createRestaurant = () => {
+        history.push('/user/restaurants/new');
     }
 
 
@@ -188,13 +220,26 @@ const ProfilPage = () => {
                                     <ReviewCard key={index} review={result} />): null 
                                 }
                                 {
-                                    tab === 'Comments' ? userReviews.map((result, index) =>
-                                    <ReviewCard key={index} review={result} />): null 
-                                }
+                                    tab === 'Comments' ? userComments.map(comment =>
+                                            <div className="comment-container">
+                                                <div className="comment-left">
+                                                    <span className="commenter">{comment.author.first_name} {comment.author.last_name}</span>
+                                                    <span className="comment-text">{comment.text}</span>
+                                                </div>
+                                                <span className="time-stamp">{comment.created}</span>
+                                            </div>
+                                        ) : null
+                                }                       
                                 {
-                                    tab === 'Restaurants' ? userReviews.map((result, index) =>
-                                    <ReviewCard key={index} review={result} />): null 
+                                    tab === 'Restaurants' ? 
+                                    (<div>
+                                        {userRestaurant.map((result, index) => 
+                                        <RestaurantCard key={index} restaurant={result}/>)}
+                                        <button onClick={createRestaurant}>Create new restaurant</button>                                
+                                    </div>                                     
+                                    ) : null 
                                 }
+                                                          
                             </Middlecolumn>
 
                             <Columnright>

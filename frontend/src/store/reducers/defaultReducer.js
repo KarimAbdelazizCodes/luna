@@ -9,6 +9,7 @@ const initialState = {
     reviews: [],
     comments: [],
     userReviews: [],
+    userComments: [],
 }
 
 const defaultReducer = (state=initialState, action) => {
@@ -38,6 +39,10 @@ const defaultReducer = (state=initialState, action) => {
             return {...state, reviews: action.payload}
         case 'REVIEW_COMMENTS':
             return {...state, comments: action.payload}
+        case 'USERCOMMENTS':
+            return {...state, userComments: action.payload}
+        case 'USERRAURANT':
+            return {...state, userRestaurant: action.payload}
         case 'NEW_COMMENT':
             return {...state, comments: [action.payload, ...state.comments]}
         case 'DROP_KEY':

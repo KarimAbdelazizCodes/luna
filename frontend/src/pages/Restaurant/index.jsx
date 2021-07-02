@@ -14,6 +14,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  height: 100vh;
 `
 
 const RestaurantPage = props => {
