@@ -3,7 +3,7 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchCategories} from "../../store/actions/get_categories";
-import RestaurantCard from "../../components/Restaurant/card/RestaurantCard";
+import RestaurantCard from "../../components/Restaurant/small_card/RestaurantCard";
 import {Results} from "../Home/styled";
 import {search} from "../../store/actions/home_search";
 import ReviewCard from "../../components/ReviewCard";

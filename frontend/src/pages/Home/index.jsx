@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import {Results, Search} from "./styled";
-import RestaurantCard from "../../components/Restaurant/card/RestaurantCard";
+import RestaurantCard from "../../components/Restaurant/small_card/RestaurantCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTopRestaurants } from "../../store/actions/top_restaurants";
 import { useState } from "react";
