@@ -1,6 +1,6 @@
 import React from 'react';
 import { RatingWrapper } from './styled';
-import ratingStar from '../../assets/star.svg'
+import ratingStar from '../../assets/reviews.svg'
 import { useState } from 'react'
 import styled from "styled-components";
 

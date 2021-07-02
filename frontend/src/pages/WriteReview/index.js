@@ -8,7 +8,8 @@ import StaticRating from '../../components/Rating/static';
 import styled from 'styled-components';
 import tempBackground from '../../assets/homepage.jpg';
 import { fetchRestaurant } from '../../store/actions/get_restaurant';
-
+import { fetchUserData } from '../../store/actions/get_userdata';
+import Axios from "../../api";
 
 
 
@@ -101,9 +102,25 @@ const WriteReviewPage = (props) => {
 
     }
 
-    const handleSubmit = () => {
-
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(localStorage.getItem('token'));
+        try {
+            const url = `/reviews/new/${restaurant_id}/`
+            const config = {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+            };
+            const body = {
+                content: content,
+                rating: '5',
+            }
+            const response = await Axios.post(url, body, config)
+        } catch (err) {
+            console.error(err);
+        }
     }
+
+    console.log(state.restaurant.avatar)
 
     useEffect(() => {
         content ? setPalceholder("Your review") : setPalceholder(defaultTxt);
@@ -111,6 +128,7 @@ const WriteReviewPage = (props) => {
 
     useEffect(() => {
         dispatch(fetchRestaurant(restaurant_id))
+        dispatch(fetchUserData())
     }, [])
 
 
@@ -118,11 +136,11 @@ const WriteReviewPage = (props) => {
         <PageWrapper>
             <Header />
             <main>
-                { state.restaurant.category &&
+                { state.restaurant.category && 
                 <MakeRevieWrapper>
                     
                     <div className='banner'>
-                        <img src={tempBackground}></img>
+                        <img alt='banner' src={state.restaurant.avatar ? state.restaurant.avatar : tempBackground}></img>
                         <article>
                             <h1>{state.restaurant.name}</h1>
                             {<h2>{state.restaurant.category.category}</h2>}

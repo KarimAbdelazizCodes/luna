@@ -10,6 +10,7 @@ import pin from '../../../assets/pin.svg'
 import phone from '../../../assets/phone.svg'
 import web from '../../../assets/web.svg'
 import { withRouter} from "react-router";
+import { fetchUserData } from '../../../store/actions/get_userdata';
 
 const MainRestaurantView = props => {
     const { id, avatar, name, hours, price_level, number_of_reviews, average_rating, category, street,
@@ -41,6 +42,10 @@ const MainRestaurantView = props => {
             props.history.push('/signin')
         }
     }
+
+    useEffect(() => {
+        dispatch(fetchUserData());
+    },[])
 
     return (
         <>
