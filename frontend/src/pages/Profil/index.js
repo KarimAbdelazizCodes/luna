@@ -40,8 +40,6 @@ const Columnleft = styled.div`
     transform: translateY(-50%);
 
     .resizeProfile{
-        /* padding-top: 10px;
-        padding-right: 17px; */
         width: 260px;
         height: 260px;
     }
@@ -190,24 +188,24 @@ const ProfilPage = () => {
                         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 20 }}>
                             <Columnleft>
 
-                                <img class="resizeProfile"src={userData.avatar} id="ProfilePic" alt="ProfilePic"></img>
+                                <img class="resizeProfile"src={userData.avatar} id="ProfilePic" alt="ProfilePic"/>
                                 <NameBox>
                                     <h2>{userData.first_name}'s Profile</h2>
                                 </NameBox>
                                     <ColumnBar>
-                                        <img class="resize" src={Reviews} id="Reviews" alt="reviews"></img>
+                                        <img class="resize" src={Reviews} id="Reviews" alt="reviews"/>
                                         <p onClick={showReviews}>Reviews</p>
                                     </ColumnBar>
                                     <ColumnBar>
-                                        <img class="resize" src={Comment} id="Comment" alt="comment"></img>
+                                        <img class="resize" src={Comment} id="Comment" alt="comment"/>
                                         <p onClick={showComments}>Comment</p>
                                     </ColumnBar>
                                     <ColumnBar>
-                                        <img class="resize" src={Restaurant} id="Restaurant" alt="restaurant"></img>
+                                        <img class="resize" src={Restaurant} id="Restaurant" alt="restaurant"/>
                                         <p onClick={showRestaurants}>Restaurant</p>
                                     </ColumnBar>
                                     <ColumnBar>
-                                        <img class="resize" src={Edit} id="Edit" alt="edit"></img>
+                                        <img class="resize" src={Edit} id="Edit" alt="edit"/>
                                         <p onClick={editUser}>Edit</p>
                                     </ColumnBar>
 
