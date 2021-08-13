@@ -117,7 +117,7 @@ const PersonalDetails = styled.div`
     }
 `
 
-const Columnright = styled.div`
+const ColumnRight = styled.div`
     margin-left: 50px;
     margin-right: 100px;
     
@@ -167,9 +167,6 @@ const ProfilPage = () => {
     }
 
 
-
-
-
     return (
         <>
             <Header />
@@ -178,10 +175,10 @@ const ProfilPage = () => {
                     <img class="resizeBanner" src={BannerPic} id="BannerImg" alt="banner"></img>
                 </Banner> */}
                 <PersonalDetails imgUrl={BannerPic}>
-                                    <h2 style={{color: "white"}}>{userData.first_name} {userData.last_name}</h2>
+                                    <h2 style={{color: "white"}}>{userData['first_name']} {userData.last_name}</h2>
                                     <h2 style={{color: "white"}}>{userData.location}</h2>
-                                    <h2 style={{color: "white"}}>{userData.number_of_reviews} reviews</h2>
-                                    <h2 style={{color: "white"}}>{userData.number_of_comments} comments</h2>
+                                    <h2 style={{color: "white"}}>{userData['number_of_reviews']} reviews</h2>
+                                    <h2 style={{color: "white"}}>{userData['number_of_comments']} comments</h2>
                 </PersonalDetails>
                 
                     <MainContainer>
@@ -190,22 +187,22 @@ const ProfilPage = () => {
 
                                 <img class="resizeProfile"src={userData.avatar} id="ProfilePic" alt="ProfilePic"/>
                                 <NameBox>
-                                    <h2>{userData.first_name}'s Profile</h2>
+                                    <h2>{userData['first_name']}'s Profile</h2>
                                 </NameBox>
                                     <ColumnBar>
-                                        <img class="resize" src={Reviews} id="Reviews" alt="reviews"/>
+                                        <img className="resize" src={Reviews} id="Reviews" alt="reviews"/>
                                         <p onClick={showReviews}>Reviews</p>
                                     </ColumnBar>
                                     <ColumnBar>
-                                        <img class="resize" src={Comment} id="Comment" alt="comment"/>
+                                        <img className="resize" src={Comment} id="Comment" alt="comment"/>
                                         <p onClick={showComments}>Comment</p>
                                     </ColumnBar>
                                     <ColumnBar>
-                                        <img class="resize" src={Restaurant} id="Restaurant" alt="restaurant"/>
+                                        <img className="resize" src={Restaurant} id="Restaurant" alt="restaurant"/>
                                         <p onClick={showRestaurants}>Restaurant</p>
                                     </ColumnBar>
                                     <ColumnBar>
-                                        <img class="resize" src={Edit} id="Edit" alt="edit"/>
+                                        <img className="resize" src={Edit} id="Edit" alt="edit"/>
                                         <p onClick={editUser}>Edit</p>
                                     </ColumnBar>
 
@@ -240,7 +237,7 @@ const ProfilPage = () => {
                                                           
                             </Middlecolumn>
 
-                            <Columnright>
+                            <ColumnRight>
                                 <div>
                                     <h3 style={{color: "black"}}>About ...</h3>
                                     <p>{userData.about}</p>
@@ -253,7 +250,7 @@ const ProfilPage = () => {
                                     <h2 style={{color: "black"}}>Description</h2>
                                     <p>{userData.description}</p>
                                 </div>
-                            </Columnright>
+                            </ColumnRight>
                         </div>
                  </MainContainer>
             <Footer />

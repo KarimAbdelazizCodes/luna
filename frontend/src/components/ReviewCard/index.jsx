@@ -17,7 +17,7 @@ const ReviewCard = props => {
         const config = {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         };
-        const response = await Axios.patch(url, null, config)
+        await Axios.patch(url, null, config)
     }
 
     const restaurantPage = () => {
